@@ -1,0 +1,174 @@
+<div class="appointment-form-container">
+  <div class="form-header">
+    <h1>Schedule Appointment</h1>
+    <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <!-- Customer and Vehicle Selection -->
+    <div class="form-section">
+      <h2>Customer & Vehicle Information</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="customerId">Customer *</label>
+          <select id="customerId" formControlName="customerId" class="form-control">
+            <option value="">Select Customer</option>
+            <option *ngFor="let customer of customers" [value]="customer.id">
+              {{ customer.name }} - {{ customer.phone }}
+            </option>
+          </select>
+          <div class="validation-error" *ngIf="appointmentForm.get('customerId')?.invalid && appointmentForm.get('customerId')?.touched">
+            Customer is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicleId">Vehicle *</label>
+          <select id="vehicleId" formControlName="vehicleId" class="form-control" 
+                  [disabled]="!appointmentForm.get('customerId')?.value">
+            <option value="">Select Vehicle</option>
+            <option *ngFor="let vehicle of customerVehicles" [value]="vehicle.id">
+              {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.licensePlate }})
+            </option>
+          </select>
+          <div class="validation-error" *ngIf="appointmentForm.get('vehicleId')?.invalid && appointmentForm.get('vehicleId')?.touched">
+            Vehicle is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Type Selection -->
+    <div class="form-section">
+      <h2>Select Services *</h2>
+      
+      <div class="service-categories">
+        <div *ngFor="let category of serviceCategories" class="category-group">
+          <h3>{{ category.name }}</h3>
+          <div class="service-checkboxes">
+            <label *ngFor="let serviceType of getServiceTypesForCategory(category.id)" 
+                   class="service-checkbox">
+              <input type="checkbox" 
+                     [checked]="isServiceTypeSelected(serviceType)"
+                     (change)="toggleServiceType(serviceType)">
+              <span class="service-name">{{ serviceType.name }}</span>
+              <span class="service-duration">{{ formatDuration(serviceType.duration) }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="duration-summary" *ngIf="totalDuration > 0">
+        <strong>Total Duration:</strong> {{ formatDuration(totalDuration) }}
+      </div>
+
+      <div class="validation-error" *ngIf="selectedServiceTypes.length === 0 && appointmentForm.touched">
+        Please select at least one service
+      </div>
+    </div>
+
+    <!-- Date and Time Selection -->
+    <div class="form-section">
+      <h2>Date & Time</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="appointmentDate">Date *</label>
+          <input type="date" id="appointmentDate" formControlName="appointmentDate" 
+                 class="form-control" [min]="getTodayDate()">
+          <div class="validation-error" *ngIf="appointmentForm.get('appointmentDate')?.invalid && appointmentForm.get('appointmentDate')?.touched">
+            Date is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="appointmentTime">Time *</label>
+          <select id="appointmentTime" formControlName="appointmentTime" class="form-control"
+                  [disabled]="!appointmentForm.get('appointmentDate')?.value || totalDuration === 0">
+            <option value="">
+              {{ totalDuration === 0 ? 'Select services first' : 'Select Time' }}
+            </option>
+            <option *ngFor="let slot of availableTimeSlots" [value]="formatTimeForValue(slot.startTime)">
+              {{ formatTime(slot.startTime) }} ({{ slot.availableBays.length }} bays available)
+            </option>
+          </select>
+          <div class="validation-error" *ngIf="appointmentForm.get('appointmentTime')?.invalid && appointmentForm.get('appointmentTime')?.touched">
+            Time is required
+          </div>
+          <div class="info-message" *ngIf="totalDuration === 0">
+            Please select at least one service to see available time slots
+          </div>
+          <div class="info-message" *ngIf="availableTimeSlots.length === 0 && appointmentForm.get('appointmentDate')?.value && totalDuration > 0">
+            No available time slots for selected date and duration
+          </div>
+        </div>
+      </div>
+
+      <div class="time-summary" *ngIf="estimatedEndTime">
+        <div class="time-info">
+          <span class="label">Estimated End Time:</span>
+          <span class="value">{{ formatTime(estimatedEndTime) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bay and Technician Assignment -->
+    <div class="form-section">
+      <h2>Assignment</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="serviceBay">Service Bay *</label>
+          <select id="serviceBay" formControlName="serviceBay" class="form-control">
+            <option value="">Select Bay</option>
+            <option *ngFor="let bay of availableBays" [value]="bay">
+              Bay {{ bay }}
+            </option>
+          </select>
+          <div class="validation-error" *ngIf="appointmentForm.get('serviceBay')?.invalid && appointmentForm.get('serviceBay')?.touched">
+            Service bay is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="technicianId">Technician *</label>
+          <select id="technicianId" formControlName="technicianId" class="form-control">
+            <option value="">Select Technician</option>
+            <option *ngFor="let tech of technicians" [value]="tech.id">
+              {{ tech.name }}
+            </option>
+          </select>
+          <div class="validation-error" *ngIf="appointmentForm.get('technicianId')?.invalid && appointmentForm.get('technicianId')?.touched">
+            Technician is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="form-section">
+      <h2>Additional Notes</h2>
+      
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" formControlName="notes" class="form-control" 
+                  rows="3" placeholder="Optional notes about the appointment"></textarea>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()" [disabled]="saving">
+        Cancel
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="saving || appointmentForm.invalid || selectedServiceTypes.length === 0">
+        {{ saving ? 'Creating...' : 'Create Appointment' }}
+      </button>
+    </div>
+  </form>
+</div>

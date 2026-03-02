@@ -1,0 +1,88 @@
+<div class="recommendation-panel-container">
+  <div class="panel-header">
+    <h3>Service Recommendations</h3>
+    <span class="recommendation-count" *ngIf="recommendations.length > 0">
+      {{ recommendations.length }} recommendation(s)
+    </span>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="recommendations.length === 0" class="empty-state">
+    <div class="empty-icon">✓</div>
+    <h4>All Caught Up!</h4>
+    <p>No service recommendations at this time.</p>
+    <p class="empty-hint">The vehicle is up-to-date on recommended services.</p>
+  </div>
+
+  <!-- Recommendations List -->
+  <div *ngIf="recommendations.length > 0" class="recommendations-list">
+    <div
+      *ngFor="let rec of recommendations"
+      class="recommendation-card"
+      [class.priority-high-card]="rec.priority === 'High'"
+      [class.priority-medium-card]="rec.priority === 'Medium'"
+      [class.priority-low-card]="rec.priority === 'Low'"
+    >
+      <div class="card-header">
+        <div class="service-info">
+          <h4 class="service-name">{{ rec.serviceName }}</h4>
+          <span class="service-category">{{ rec.category }}</span>
+        </div>
+        <span class="priority-badge" [ngClass]="getPriorityClass(rec.priority)">
+          {{ rec.priority }}
+        </span>
+      </div>
+
+      <div class="card-body">
+        <div class="reason-section">
+          <span class="reason-icon">ℹ️</span>
+          <span class="reason-text">{{ getReasonLabel(rec.reason) }}</span>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item" *ngIf="rec.lastPerformedDate">
+            <span class="detail-label">Last Performed:</span>
+            <span class="detail-value">{{ formatDate(rec.lastPerformedDate) }}</span>
+          </div>
+
+          <div class="detail-item" *ngIf="rec.lastPerformedMileage">
+            <span class="detail-label">At Mileage:</span>
+            <span class="detail-value">{{ formatMileage(rec.lastPerformedMileage) }}</span>
+          </div>
+
+          <div class="detail-item" *ngIf="rec.dueAtMileage">
+            <span class="detail-label">Due At:</span>
+            <span class="detail-value">{{ formatMileage(rec.dueAtMileage) }}</span>
+          </div>
+
+          <div class="detail-item" *ngIf="rec.dueByDate">
+            <span class="detail-label">Due By:</span>
+            <span class="detail-value">{{ formatDate(rec.dueByDate) }}</span>
+          </div>
+
+          <div class="detail-item">
+            <span class="detail-label">Estimated Price:</span>
+            <span class="detail-value price">{{ formatCurrency(rec.estimatedPrice) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button
+          class="btn btn-accept"
+          (click)="acceptRecommendation(rec)"
+          title="Add this service to the ticket"
+        >
+          ✓ Accept
+        </button>
+        <button
+          class="btn btn-dismiss"
+          (click)="dismissRecommendation(rec)"
+          title="Dismiss this recommendation"
+        >
+          ✕ Dismiss
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,328 @@
+<div class="home-container">
+  <!-- Online/Offline Status Indicator -->
+  <div class="status-indicator">
+    <app-online-status></app-online-status>
+  </div>
+
+  <!-- Professional Header Banner -->
+  <div class="dashboard-header">
+    <div class="header-branding">
+      <div class="valvoline-badge">
+        <div class="badge-logo">
+          <span class="logo-v-red">V</span>
+          <span class="logo-v-blue">V</span>
+        </div>
+        <span class="badge-text">Valvoline</span>
+      </div>
+      <div class="header-title">
+        <h1>Point of Sale Dashboard</h1>
+        <p class="header-subtitle">{{ currentTime | date:'EEEE, MMMM d, y - h:mm a' }}</p>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-info" (click)="toggleUserMenu()">
+        <div class="user-avatar">
+          <span class="user-icon">👤</span>
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ currentEmployee?.name }}</span>
+          <span class="user-role">{{ currentEmployee?.role }}</span>
+        </div>
+        <span class="dropdown-icon">▼</span>
+      </div>
+
+      <!-- User Menu Dropdown -->
+      <div *ngIf="showUserMenu" class="user-menu">
+        <div class="menu-header">
+          <div class="menu-user-info">
+            <div class="menu-user-avatar">👤</div>
+            <div class="menu-user-details">
+              <div class="menu-user-name">{{ currentEmployee?.name }}</div>
+              <div class="menu-user-role">{{ currentEmployee?.role }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" (click)="navigateTo('/home'); showUserMenu = false">
+          <span class="menu-icon">🏠</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/tickets'); showUserMenu = false">
+          <span class="menu-icon">🎫</span>
+          <span>Service Tickets</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/customers'); showUserMenu = false">
+          <span class="menu-icon">👥</span>
+          <span>Customers</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/vehicle-search'); showUserMenu = false">
+          <span class="menu-icon">🚗</span>
+          <span>Vehicle Search</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/appointments'); showUserMenu = false">
+          <span class="menu-icon">📅</span>
+          <span>Appointments</span>
+        </div>
+        <div *ngIf="isManager()" class="menu-divider"></div>
+        <div *ngIf="isManager()" class="menu-item" (click)="navigateTo('/settings/data-management'); showUserMenu = false">
+          <span class="menu-icon">💾</span>
+          <span>Data Management</span>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item logout" (click)="logout(); showUserMenu = false">
+          <span class="menu-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay to close menu when clicking outside -->
+  <div *ngIf="showUserMenu" class="menu-overlay" (click)="showUserMenu = false"></div>
+
+  <!-- Dashboard Metrics -->
+  <div class="metrics-section">
+    <div class="section-title">Today's Performance</div>
+    <div class="metrics-grid">
+      <div class="metric-card revenue">
+        <div class="metric-header">
+          <span class="metric-icon">$</span>
+          <span class="metric-label">Revenue</span>
+        </div>
+        <div class="metric-value">${{ todayMetrics.revenue | number:'1.2-2' }}</div>
+        <div class="metric-footer">Today's Total</div>
+      </div>
+
+      <div class="metric-card services">
+        <div class="metric-header">
+          <span class="metric-icon">✓</span>
+          <span class="metric-label">Services</span>
+        </div>
+        <div class="metric-value">{{ todayMetrics.servicesCompleted }}</div>
+        <div class="metric-footer">Completed</div>
+      </div>
+
+      <div class="metric-card average">
+        <div class="metric-header">
+          <span class="metric-icon">~</span>
+          <span class="metric-label">Average</span>
+        </div>
+        <div class="metric-value">${{ todayMetrics.averageTicket | number:'1.2-2' }}</div>
+        <div class="metric-footer">Per Ticket</div>
+      </div>
+
+      <div class="metric-card customers">
+        <div class="metric-header">
+          <span class="metric-icon">👤</span>
+          <span class="metric-label">Customers</span>
+        </div>
+        <div class="metric-value">{{ todayMetrics.customerCount }}</div>
+        <div class="metric-footer">Served Today</div>
+      </div>
+
+      <div class="metric-card appointments">
+        <div class="metric-header">
+          <span class="metric-icon">📅</span>
+          <span class="metric-label">Appointments</span>
+        </div>
+        <div class="metric-value">{{ todayMetrics.pendingAppointments }}</div>
+        <div class="metric-footer">Pending</div>
+      </div>
+
+      <div class="metric-card inventory">
+        <div class="metric-header">
+          <span class="metric-icon">!</span>
+          <span class="metric-label">Inventory</span>
+        </div>
+        <div class="metric-value">{{ todayMetrics.lowStockItems }}</div>
+        <div class="metric-footer">Low Stock Items</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Actions -->
+  <div class="actions-section">
+    <div class="section-title">Quick Actions</div>
+    <div class="primary-actions">
+      <button class="action-btn primary" (click)="navigateTo('/tickets/new')">
+        <span class="action-icon">🎫</span>
+        <span class="action-text">
+          <span class="action-title">New Service Ticket</span>
+          <span class="action-desc">Start customer service</span>
+        </span>
+      </button>
+
+      <button class="action-btn primary" (click)="navigateTo('/tickets')">
+        <span class="action-icon">📋</span>
+        <span class="action-text">
+          <span class="action-title">Service Tickets</span>
+          <span class="action-desc">Manage tickets</span>
+        </span>
+      </button>
+
+      <button class="action-btn primary" (click)="navigateTo('/customers')">
+        <span class="action-icon">👤</span>
+        <span class="action-text">
+          <span class="action-title">Customer Lookup</span>
+          <span class="action-desc">Find customer</span>
+        </span>
+      </button>
+
+      <button class="action-btn primary" (click)="navigateTo('/vehicle-search')">
+        <span class="action-icon">🚗</span>
+        <span class="action-text">
+          <span class="action-title">Vehicle Search</span>
+          <span class="action-desc">VIN lookup</span>
+        </span>
+      </button>
+
+      <button class="action-btn primary" (click)="navigateTo('/appointments/new')">
+        <span class="action-icon">📅</span>
+        <span class="action-text">
+          <span class="action-title">Appointments</span>
+          <span class="action-desc">Schedule service</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="services-section">
+    <div class="section-title">Service Catalog</div>
+    <div class="services-grid">
+      <button class="service-card" (click)="showComingSoon('Oil Change Services')">
+        <span class="service-icon">🛢️</span>
+        <span class="service-title">Oil Change</span>
+        <span class="service-desc">All types</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Fluid Services')">
+        <span class="service-icon">💧</span>
+        <span class="service-title">Fluid Services</span>
+        <span class="service-desc">Trans, coolant, brake</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Filter Services')">
+        <span class="service-icon">🔧</span>
+        <span class="service-title">Filter Services</span>
+        <span class="service-desc">Air, cabin, fuel</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Battery Services')">
+        <span class="service-icon">🔋</span>
+        <span class="service-title">Battery</span>
+        <span class="service-desc">Test & replace</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Wiper Services')">
+        <span class="service-icon">🌧️</span>
+        <span class="service-title">Wipers</span>
+        <span class="service-desc">Blade replacement</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Light Services')">
+        <span class="service-icon">💡</span>
+        <span class="service-title">Lights</span>
+        <span class="service-desc">Headlight, taillight</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Tire Services')">
+        <span class="service-icon">🛞</span>
+        <span class="service-title">Tires</span>
+        <span class="service-desc">Pressure, rotation</span>
+      </button>
+
+      <button class="service-card" (click)="showComingSoon('Inspection')">
+        <span class="service-icon">🔍</span>
+        <span class="service-title">Inspection</span>
+        <span class="service-desc">Multi-point</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Management & Tools -->
+  <div class="management-section">
+    <div class="section-title">Management & Tools</div>
+    <div class="management-grid">
+      <button class="mgmt-card" (click)="showComingSoon('Inventory Management')">
+        <span class="mgmt-icon">📦</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Inventory</span>
+          <span class="mgmt-desc">Stock & orders</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Reports')">
+        <span class="mgmt-icon">📊</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Reports</span>
+          <span class="mgmt-desc">Sales analytics</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Payments')">
+        <span class="mgmt-icon">💳</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Payments</span>
+          <span class="mgmt-desc">Process & refunds</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Promotions')">
+        <span class="mgmt-icon">🎁</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Promotions</span>
+          <span class="mgmt-desc">Deals & coupons</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Employees')">
+        <span class="mgmt-icon">👔</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Employees</span>
+          <span class="mgmt-desc">Staff management</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Settings')">
+        <span class="mgmt-icon">⚙️</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Settings</span>
+          <span class="mgmt-desc">Configuration</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Clock In/Out')">
+        <span class="mgmt-icon">⏰</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Time Clock</span>
+          <span class="mgmt-desc">Clock in/out</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Cash Drawer')">
+        <span class="mgmt-icon">💵</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Cash Drawer</span>
+          <span class="mgmt-desc">Open drawer</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Print Receipt')">
+        <span class="mgmt-icon">🖨️</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Print</span>
+          <span class="mgmt-desc">Receipts & reports</span>
+        </span>
+      </button>
+
+      <button class="mgmt-card" (click)="showComingSoon('Help & Support')">
+        <span class="mgmt-icon">❓</span>
+        <span class="mgmt-content">
+          <span class="mgmt-title">Help</span>
+          <span class="mgmt-desc">Support & docs</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

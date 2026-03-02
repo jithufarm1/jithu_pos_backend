@@ -1,0 +1,58 @@
+<div class="technician-selector-container">
+  <div class="selector-header">
+    <h3>Assign Technician</h3>
+    <div class="estimated-time" *ngIf="estimatedCompletionMinutes > 0">
+      <span class="time-label">Est. Time:</span>
+      <span class="time-value">{{ formatEstimatedTime(estimatedCompletionMinutes) }}</span>
+    </div>
+  </div>
+
+  <!-- Unassigned Option -->
+  <div
+    class="technician-card unassigned-card"
+    [class.selected]="!selectedTechnicianId"
+    (click)="clearSelection()"
+  >
+    <div class="card-content">
+      <div class="technician-icon">👤</div>
+      <div class="technician-info">
+        <h4>Unassigned</h4>
+        <p>No technician assigned yet</p>
+      </div>
+    </div>
+    <div class="selection-indicator" *ngIf="!selectedTechnicianId">✓</div>
+  </div>
+
+  <!-- Technicians List -->
+  <div class="technicians-list">
+    <div
+      *ngFor="let tech of technicians"
+      class="technician-card"
+      [class.selected]="selectedTechnicianId === tech.id"
+      (click)="selectTechnician(tech.id)"
+    >
+      <div class="card-content">
+        <div class="technician-icon">👨‍🔧</div>
+        <div class="technician-info">
+          <h4>{{ tech.name }}</h4>
+          <div class="workload-badge" [ngClass]="getWorkloadClass(tech.currentWorkload)">
+            {{ getWorkloadLabel(tech.currentWorkload) }}
+            <span *ngIf="tech.currentWorkload">({{ tech.currentWorkload }} tickets)</span>
+          </div>
+          <div class="certifications" *ngIf="tech.certifications && tech.certifications.length > 0">
+            <span class="cert-badge" *ngFor="let cert of tech.certifications">
+              {{ cert }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="selection-indicator" *ngIf="selectedTechnicianId === tech.id">✓</div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="technicians.length === 0" class="empty-state">
+    <div class="empty-icon">👥</div>
+    <p>No technicians available</p>
+  </div>
+</div>

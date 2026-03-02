@@ -1,0 +1,68 @@
+<div class="weekly-view-container">
+  <!-- Week Header -->
+  <div class="week-header">
+    <h3 class="week-range">{{ getWeekRangeText() }}</h3>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading appointments...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="loadWeekAppointments()">Retry</button>
+  </div>
+
+  <!-- Week Grid -->
+  <div *ngIf="!loading && !error" class="week-grid">
+    <div
+      *ngFor="let day of weekDays"
+      [ngClass]="getDayClass(day)"
+      (click)="onDayClick(day)"
+      [attr.data-intensity]="getIntensityLevel(day.appointmentCount)"
+    >
+      <!-- Day Header -->
+      <div class="day-header">
+        <span class="day-name">{{ day.dayOfWeek }}</span>
+        <span class="day-number">{{ day.dayNumber }}</span>
+      </div>
+
+      <!-- Appointment Count -->
+      <div class="appointment-count">
+        <span class="count-number">{{ day.appointmentCount }}</span>
+        <span class="count-label">{{ day.appointmentCount === 1 ? 'appointment' : 'appointments' }}</span>
+      </div>
+
+      <!-- Busy Indicator -->
+      <div *ngIf="day.isBusy" class="busy-indicator">
+        <span class="busy-badge">Busy Day</span>
+      </div>
+
+      <!-- Visual Intensity Bar -->
+      <div class="intensity-bar" [attr.data-level]="getIntensityLevel(day.appointmentCount)"></div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div *ngIf="!loading && !error" class="legend">
+    <div class="legend-item">
+      <div class="legend-color" data-level="low"></div>
+      <span>1-3 appointments</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" data-level="medium"></div>
+      <span>4-7 appointments</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" data-level="high"></div>
+      <span>8-10 appointments</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" data-level="very-high"></div>
+      <span>11+ appointments (Busy)</span>
+    </div>
+  </div>
+</div>

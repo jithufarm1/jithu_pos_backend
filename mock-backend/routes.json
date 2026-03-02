@@ -1,0 +1,5 @@
+{
+  "/api/vehicles/:vin": "/vehicles?vin=:vin",
+  "/api/vehicles/reference-data": "/reference-data",
+  "/api/vehicles": "/vehicles"
+}

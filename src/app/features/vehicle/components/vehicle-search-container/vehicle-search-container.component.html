@@ -1,0 +1,10 @@
+<main class="main-content">
+  <div class="container">
+    <app-vehicle-search
+      (vehicleFound)="onVehicleFound($event)"
+      (searchError)="onSearchError($event)"
+    ></app-vehicle-search>
+
+    <app-vehicle-details [vehicle]="selectedVehicle"></app-vehicle-details>
+  </div>
+</main>

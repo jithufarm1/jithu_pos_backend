@@ -1,0 +1,110 @@
+{
+  "makes": [
+    {
+      "id": "toyota",
+      "name": "Toyota",
+      "models": [
+        {
+          "id": "camry",
+          "name": "Camry",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "corolla",
+          "name": "Corolla",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "rav4",
+          "name": "RAV4",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        }
+      ]
+    },
+    {
+      "id": "honda",
+      "name": "Honda",
+      "models": [
+        {
+          "id": "accord",
+          "name": "Accord",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "civic",
+          "name": "Civic",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "crv",
+          "name": "CR-V",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        }
+      ]
+    },
+    {
+      "id": "ford",
+      "name": "Ford",
+      "models": [
+        {
+          "id": "f150",
+          "name": "F-150",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "escape",
+          "name": "Escape",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "explorer",
+          "name": "Explorer",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        }
+      ]
+    },
+    {
+      "id": "chevrolet",
+      "name": "Chevrolet",
+      "models": [
+        {
+          "id": "silverado",
+          "name": "Silverado",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "equinox",
+          "name": "Equinox",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        },
+        {
+          "id": "malibu",
+          "name": "Malibu",
+          "years": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015]
+        }
+      ]
+    }
+  ],
+  "engines": [
+    "2.5L 4-Cylinder",
+    "3.5L V6",
+    "2.0L Turbo 4-Cylinder",
+    "5.0L V8",
+    "3.6L V6",
+    "1.5L Turbo 4-Cylinder",
+    "2.4L 4-Cylinder",
+    "Hybrid 2.5L 4-Cylinder"
+  ],
+  "serviceTypes": [
+    "Oil Change",
+    "Tire Rotation",
+    "Multi-Point Inspection",
+    "Brake Inspection",
+    "Air Filter Replacement",
+    "Cabin Air Filter Replacement",
+    "Battery Test",
+    "Fluid Top-Off",
+    "Wiper Blade Replacement"
+  ],
+  "lastUpdated": "2024-02-24T10:00:00Z"
+}

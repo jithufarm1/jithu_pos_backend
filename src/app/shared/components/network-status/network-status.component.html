@@ -1,0 +1,10 @@
+<div class="network-status" *ngIf="networkStatus$ | async as status">
+  <div class="status-indicator" [class.online]="status.isOnline" [class.offline]="!status.isOnline">
+    <span class="status-dot"></span>
+    <span class="status-text">{{ status.isOnline ? 'Online' : 'Offline' }}</span>
+  </div>
+  <div class="last-sync" *ngIf="!status.isOnline && status.lastSync">
+    <span class="sync-label">Last sync:</span>
+    <span class="sync-time">{{ formatLastSync(status.lastSync) }}</span>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="ticket-summary-container">
+  <div class="summary-header">
+    <h3>Ticket Summary</h3>
+  </div>
+
+  <!-- Line Items -->
+  <div class="line-items-section" *ngIf="lineItems.length > 0">
+    <h4>Services</h4>
+    <div class="line-items-list">
+      <div class="line-item" *ngFor="let item of lineItems">
+        <div class="item-info">
+          <span class="item-name">{{ item.serviceName }}</span>
+          <span class="item-qty">× {{ item.quantity }}</span>
+        </div>
+        <span class="item-total">{{ formatCurrency(item.lineTotal) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="lineItems.length === 0" class="empty-state">
+    <p>No services added yet</p>
+  </div>
+
+  <!-- Parts and Labor Breakdown -->
+  <div class="breakdown-section" *ngIf="lineItems.length > 0">
+    <div class="breakdown-row">
+      <span class="breakdown-label">Parts:</span>
+      <span class="breakdown-value">{{ formatCurrency(partsTotal) }}</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="breakdown-label">Labor:</span>
+      <span class="breakdown-value">
+        {{ formatCurrency(laborTotal) }}
+        <span class="labor-time">({{ formatLaborTime(totalLaborMinutes) }})</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Pricing Summary -->
+  <div class="pricing-section" *ngIf="lineItems.length > 0">
+    <div class="pricing-row">
+      <span class="pricing-label">Subtotal:</span>
+      <span class="pricing-value">{{ formatCurrency(subtotal) }}</span>
+    </div>
+
+    <!-- Discounts -->
+    <div class="discounts-section" *ngIf="discounts.length > 0">
+      <div class="pricing-row discount-row">
+        <span class="pricing-label">Discounts:</span>
+        <span class="pricing-value discount">-{{ formatCurrency(discountTotal) }}</span>
+      </div>
+      <div class="discount-details">
+        <div class="discount-item" *ngFor="let discount of discounts">
+          <span class="discount-reason">{{ discount.reason }}</span>
+          <span class="discount-amount">-{{ formatCurrency(discount.amount) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-row">
+      <span class="pricing-label">
+        Tax ({{ (taxRate * 100).toFixed(2) }}%):
+      </span>
+      <span class="pricing-value">{{ formatCurrency(tax) }}</span>
+    </div>
+
+    <div class="pricing-row total-row">
+      <span class="pricing-label">Total:</span>
+      <span class="pricing-value total">{{ formatCurrency(total) }}</span>
+    </div>
+  </div>
+</div>

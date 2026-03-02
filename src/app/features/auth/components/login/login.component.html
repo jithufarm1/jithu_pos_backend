@@ -1,0 +1,146 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <!-- Online/Offline Status Indicator -->
+    <div class="status-indicator">
+      <app-online-status></app-online-status>
+    </div>
+
+    <!-- Header Section with Logo and Branding -->
+    <div class="login-header">
+      <div class="logo-section">
+        <div class="logo-box">
+          <div class="valvoline-logo">
+            <span class="logo-v-red">V</span>
+            <span class="logo-v-blue">V</span>
+          </div>
+          <div class="instant-oil-change">Instant Oil Change</div>
+        </div>
+        <div class="pos-system-label">
+          <div class="pos-icon-circle">⚙</div>
+          <div class="pos-text">
+            <span class="pos-main">POS</span>
+            <span class="pos-sub">system</span>
+          </div>
+        </div>
+      </div>
+      <div class="version-banner">
+        Version 6.25.2-20250915.1008
+      </div>
+    </div>
+
+    <!-- Login Form Section -->
+    <div class="login-content">
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-alert">
+        • Invalid User Id or Password.
+      </div>
+
+      <form class="login-form" (ngSubmit)="onLogin()">
+        <div class="form-row">
+          <label for="employeeId" class="form-label">User Id:</label>
+          <input
+            type="text"
+            id="employeeId"
+            [(ngModel)]="employeeId"
+            name="employeeId"
+            (input)="clearError()"
+            (keypress)="onKeyPress($event)"
+            [disabled]="loading"
+            class="form-input"
+            autocomplete="username"
+            autofocus
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            (input)="clearError()"
+            (keypress)="onKeyPress($event)"
+            [disabled]="loading"
+            class="form-input"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <!-- Offline PIN Authentication -->
+        <div *ngIf="showPINInput" class="offline-auth-section">
+          <div class="divider">
+            <span>OR</span>
+          </div>
+          <div class="form-row">
+            <label for="employeeIdForPIN" class="form-label">Employee ID:</label>
+            <input
+              type="text"
+              id="employeeIdForPIN"
+              [(ngModel)]="employeeIdForPIN"
+              name="employeeIdForPIN"
+              (input)="pinError = ''"
+              [disabled]="loading"
+              class="form-input"
+              autocomplete="username"
+              placeholder="Enter Employee ID"
+            />
+          </div>
+          <div class="form-row">
+            <label for="pin" class="form-label">Offline PIN:</label>
+            <input
+              type="password"
+              id="pin"
+              [(ngModel)]="pin"
+              name="pin"
+              (input)="pinError = ''"
+              [disabled]="loading"
+              class="form-input"
+              maxlength="6"
+              placeholder="Enter 4-6 digit PIN"
+              autocomplete="current-password"
+            />
+          </div>
+          <div *ngIf="pinError" class="error-alert">
+            • {{ pinError }}
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-submit btn-offline" (click)="onPINLogin()" [disabled]="loading || !employeeIdForPIN || !pin">
+              {{ loading ? 'Authenticating...' : 'Login with PIN' }}
+            </button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit" [disabled]="loading || !employeeId || !password">
+            {{ loading ? 'Signing In...' : 'Submit' }}
+          </button>
+        </div>
+      </form>
+
+      <!-- Additional Links -->
+      <div class="additional-links">
+        <a href="#" class="link-item">
+          <span class="link-icon">✓</span>
+          Access SDS Sheets
+        </a>
+        <a href="#" class="link-item">
+          <span class="link-icon">✓</span>
+          Hazardous Communication Plan
+        </a>
+      </div>
+
+      <!-- Clear Lockout Button (Development) -->
+      <div class="admin-actions">
+        <button type="button" class="btn-clear-lockout" (click)="clearLockout()">
+          Clear Lockout
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>© Copyright 2006-2024 Valvoline Inc. All Rights Reserved. <a href="#" class="terms-link">Terms of Use</a>.</p>
+    </div>
+  </div>
+</div>

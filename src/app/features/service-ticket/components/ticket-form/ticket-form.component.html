@@ -1,0 +1,185 @@
+<div class="ticket-form-container">
+  <div class="form-header">
+    <h1>Create Service Ticket</h1>
+    <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <!-- Customer and Vehicle Selection -->
+    <div class="form-section">
+      <h2>Customer & Vehicle Information</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="customerId">Customer *</label>
+          <select id="customerId" formControlName="customerId" class="form-control">
+            <option value="">Select Customer</option>
+            <option *ngFor="let customer of customers" [value]="customer.id">
+              {{ customer.name }} - {{ customer.phone }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicleId">Vehicle *</label>
+          <select id="vehicleId" formControlName="vehicleId" class="form-control" 
+                  [disabled]="!ticketForm.get('customerId')?.value">
+            <option value="">Select Vehicle</option>
+            <option *ngFor="let vehicle of customerVehicles" [value]="vehicle.id">
+              {{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.vin }})
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="currentMileage">Current Mileage *</label>
+          <input type="number" id="currentMileage" formControlName="currentMileage" 
+                 class="form-control" placeholder="Enter current mileage">
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <input type="text" id="notes" formControlName="notes" 
+                 class="form-control" placeholder="Optional notes">
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Recommendations -->
+    <div class="form-section" *ngIf="recommendations.length > 0">
+      <h2>Recommended Services</h2>
+      <div class="recommendations-list">
+        <div *ngFor="let rec of recommendations" class="recommendation-card">
+          <div class="rec-header">
+            <span class="rec-name">{{ rec.serviceName }}</span>
+            <span class="rec-priority" [ngClass]="getPriorityClass(rec.priority)">
+              {{ rec.priority }}
+            </span>
+          </div>
+          <div class="rec-reason">{{ rec.reason.replace('_', ' ') }}</div>
+          <div class="rec-details">
+            <span *ngIf="rec.lastPerformedDate">
+              Last: {{ rec.lastPerformedDate | date:'shortDate' }}
+            </span>
+            <span *ngIf="rec.dueAtMileage">
+              Due at: {{ rec.dueAtMileage | number }} miles
+            </span>
+          </div>
+          <div class="rec-actions">
+            <button type="button" class="btn-sm btn-primary" (click)="acceptRecommendation(rec)">
+              Add to Ticket
+            </button>
+            <button type="button" class="btn-sm btn-secondary" (click)="dismissRecommendation(rec)">
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Catalog -->
+    <div class="form-section">
+      <h2>Select Services</h2>
+      
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button type="button" 
+                *ngFor="let category of categories"
+                class="tab-button"
+                [class.active]="selectedCategory === category"
+                (click)="selectedCategory = category">
+          {{ getCategoryDisplayName(category) }}
+        </button>
+      </div>
+
+      <!-- Service Grid -->
+      <div class="services-grid">
+        <div *ngFor="let service of getServicesForCategory()" 
+             class="service-card"
+             (click)="addService(service)">
+          <div class="service-name">{{ service.name }}</div>
+          <div class="service-price">${{ service.basePrice.toFixed(2) }}</div>
+          <div class="service-labor">{{ service.laborMinutes }} min</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selected Services -->
+    <div class="form-section" *ngIf="selectedServices.length > 0">
+      <h2>Selected Services</h2>
+      <table class="services-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of selectedServices">
+            <td>{{ service.name }}</td>
+            <td>
+              <input type="number" 
+                     [value]="service.quantity" 
+                     (change)="updateQuantity(service.id, $any($event.target).value)"
+                     min="1" 
+                     class="quantity-input">
+            </td>
+            <td>${{ service.unitPrice.toFixed(2) }}</td>
+            <td>${{ (service.unitPrice * service.quantity).toFixed(2) }}</td>
+            <td>
+              <button type="button" class="btn-sm btn-danger" (click)="removeService(service.id)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pricing Summary -->
+    <div class="form-section pricing-summary">
+      <h2>Pricing Summary</h2>
+      <div class="summary-grid">
+        <div class="summary-row">
+          <span>Parts Total:</span>
+          <span>${{ partsTotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Labor Total:</span>
+          <span>${{ laborTotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>${{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (8%):</span>
+          <span>${{ tax.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total:</span>
+          <span>${{ total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()" [disabled]="saving">
+        Cancel
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="saving || ticketForm.invalid || selectedServices.length === 0">
+        {{ saving ? 'Creating...' : 'Create Ticket' }}
+      </button>
+    </div>
+  </form>
+</div>

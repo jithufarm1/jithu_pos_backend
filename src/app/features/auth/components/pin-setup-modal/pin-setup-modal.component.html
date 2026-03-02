@@ -1,0 +1,75 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>Set Up Offline PIN</h2>
+      <p class="modal-subtitle">Create a PIN to access the system when offline</p>
+      <p *ngIf="currentEmployee" class="employee-context">
+        Setting up PIN for: <strong>{{ currentEmployee.name }}</strong> ({{ currentEmployee.employeeId }})
+      </p>
+    </div>
+
+    <div class="modal-body">
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <!-- PIN Setup Form -->
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="pin">Enter PIN (4-6 digits):</label>
+          <input
+            type="password"
+            id="pin"
+            [(ngModel)]="pin"
+            name="pin"
+            (input)="clearError()"
+            [disabled]="loading"
+            class="pin-input"
+            maxlength="6"
+            placeholder="Enter PIN"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPin">Confirm PIN:</label>
+          <input
+            type="password"
+            id="confirmPin"
+            [(ngModel)]="confirmPin"
+            name="confirmPin"
+            (input)="clearError()"
+            [disabled]="loading"
+            class="pin-input"
+            maxlength="6"
+            placeholder="Re-enter PIN"
+          />
+        </div>
+
+        <div class="info-box">
+          <p><strong>Why set up a PIN?</strong></p>
+          <p>Your PIN allows you to re-authenticate when the server is unavailable, ensuring you can continue working during network outages.</p>
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="onSkip()"
+            [disabled]="loading"
+          >
+            Skip for Now
+          </button>
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="loading || !pin || !confirmPin"
+          >
+            {{ loading ? 'Setting up...' : 'Set Up PIN' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

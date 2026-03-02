@@ -1,0 +1,341 @@
+<div class="data-management-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Data Management</h1>
+    <button class="btn-secondary" (click)="refreshData()" [disabled]="isLoading">
+      <span class="icon">🔄</span>
+      Refresh
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading data management information...</p>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading" class="content-grid">
+    
+    <!-- Current Status Card -->
+    <div class="card status-card">
+      <div class="card-header">
+        <h2>📊 Vehicle Database Status</h2>
+        <span class="status-badge" [class]="getStatusClass()">
+          {{ getStatusText() }}
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="label">Current Version:</span>
+          <span class="value">{{ currentVersion?.version || 'Not installed' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Last Updated:</span>
+          <span class="value">{{ currentVersion ? getDataAge() : 'Never' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Size:</span>
+          <span class="value">{{ currentVersion ? formatBytes(currentVersion.size) : 'N/A' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Total Vehicles:</span>
+          <span class="value">{{ currentVersion?.recordCount?.toLocaleString() || 'N/A' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Available Update Card -->
+    <div *ngIf="availableUpdate" class="card update-card">
+      <div class="card-header">
+        <h2>🔄 Update Available</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="label">Version:</span>
+          <span class="value">{{ availableUpdate.version }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Release Date:</span>
+          <span class="value">{{ formatDate(availableUpdate.releaseDate) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Download Size:</span>
+          <span class="value">{{ formatBytes(availableUpdate.compressedSize) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Installed Size:</span>
+          <span class="value">{{ formatBytes(availableUpdate.packageSize) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Changes:</span>
+          <span class="value">
+            {{ availableUpdate.metadata.newVehicles }} new, 
+            {{ availableUpdate.metadata.updatedVehicles }} updated
+          </span>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn-primary" (click)="downloadNow()" [disabled]="isDownloading">
+            <span class="icon">⬇️</span>
+            Download Now
+          </button>
+          <button class="btn-secondary" (click)="openScheduleModal()" [disabled]="isDownloading">
+            <span class="icon">⏰</span>
+            Schedule for Tonight
+          </button>
+          <button class="btn-link" (click)="viewChangelog()">
+            View Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download Progress Card -->
+    <div *ngIf="isDownloading" class="card progress-card">
+      <div class="card-header">
+        <h2>⏳ {{ downloadStatus === 'downloading' ? 'Downloading' : 'Installing' }}...</h2>
+      </div>
+      <div class="card-body">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="downloadProgress"></div>
+          </div>
+          <span class="progress-text">{{ downloadProgress.toFixed(1) }}%</span>
+        </div>
+        
+        <div class="progress-info">
+          <p *ngIf="downloadStatus === 'downloading'">
+            Downloading vehicle database in background...
+          </p>
+          <p *ngIf="downloadStatus === 'installing'">
+            Installing data to local storage...
+          </p>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn-secondary" (click)="pauseDownload()" *ngIf="downloadStatus === 'downloading'">
+            Pause
+          </button>
+          <button class="btn-secondary" (click)="resumeDownload()" *ngIf="downloadStatus === 'paused'">
+            Resume
+          </button>
+          <button class="btn-danger" (click)="cancelDownload()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Storage Usage Card -->
+    <div class="card storage-card">
+      <div class="card-header">
+        <h2>💾 Storage Usage</h2>
+      </div>
+      <div class="card-body">
+        <div class="storage-bar-container">
+          <div class="storage-bar">
+            <div class="storage-fill" [style.width.%]="storageInfo?.percentUsed || 0"></div>
+          </div>
+          <span class="storage-text">
+            {{ formatBytes(storageInfo?.totalUsed || 0) }} / 
+            {{ formatBytes(storageInfo?.quota || 0) }}
+            ({{ (storageInfo?.percentUsed || 0).toFixed(1) }}%)
+          </span>
+        </div>
+        
+        <div class="storage-breakdown">
+          <div class="storage-item">
+            <span class="label">Vehicle Data:</span>
+            <span class="value">{{ formatBytes(storageInfo?.vehicleData || 0) }}</span>
+          </div>
+          <div class="storage-item">
+            <span class="label">Customer Cache:</span>
+            <span class="value">{{ formatBytes(storageInfo?.customerCache || 0) }}</span>
+          </div>
+          <div class="storage-item">
+            <span class="label">Service Tickets:</span>
+            <span class="value">{{ formatBytes(storageInfo?.serviceTickets || 0) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Health Status Card -->
+    <div *ngIf="healthStatus" class="card health-card">
+      <div class="card-header">
+        <h2>🏥 System Health</h2>
+      </div>
+      <div class="card-body">
+        <div *ngIf="healthStatus.issues.length === 0" class="health-status success">
+          <span class="icon">✅</span>
+          <span>All systems operational</span>
+        </div>
+        
+        <div *ngFor="let issue of healthStatus.issues" 
+             class="health-status" 
+             [class]="issue.severity">
+          <span class="icon">
+            {{ issue.severity === 'error' ? '❌' : issue.severity === 'warning' ? '⚠️' : 'ℹ️' }}
+          </span>
+          <span>{{ issue.message }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sync History Card -->
+    <div class="card history-card">
+      <div class="card-header">
+        <h2>📜 Recent Sync History</h2>
+        <button class="btn-link" (click)="viewHistory()">View All</button>
+      </div>
+      <div class="card-body">
+        <div *ngIf="syncHistory.length === 0" class="empty-state">
+          <p>No sync history available</p>
+        </div>
+        
+        <div *ngIf="syncHistory.length > 0" class="history-list">
+          <div *ngFor="let entry of syncHistory.slice(0, 5)" class="history-item">
+            <div class="history-icon" [class]="entry.status">
+              {{ entry.status === 'success' ? '✅' : '❌' }}
+            </div>
+            <div class="history-details">
+              <div class="history-title">
+                {{ entry.action === 'install' ? 'Installed' : entry.action === 'download' ? 'Downloaded' : 'Rolled back' }}
+                version {{ entry.version }}
+              </div>
+              <div class="history-meta">
+                {{ formatDate(entry.timestamp) }} • 
+                {{ formatBytes(entry.size) }} • 
+                {{ (entry.duration / 1000).toFixed(0) }}s
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule Modal -->
+<div *ngIf="showScheduleModal" class="modal-overlay" (click)="closeScheduleModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Schedule Download</h2>
+      <button class="close-btn" (click)="closeScheduleModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Download Time:</label>
+        <input type="time" [(ngModel)]="scheduledTime" class="form-control">
+        <small class="form-hint">Download will start at this time tonight</small>
+      </div>
+      
+      <div class="form-group">
+        <label>Bandwidth Limit:</label>
+        <select [(ngModel)]="downloadOptions.bandwidthLimit" class="form-control">
+          <option [value]="0">Unlimited</option>
+          <option [value]="1">1 Mbps (Slow)</option>
+          <option [value]="5">5 Mbps</option>
+          <option [value]="10">10 Mbps (Recommended)</option>
+          <option [value]="25">25 Mbps</option>
+          <option [value]="50">50 Mbps (Fast)</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Network Type:</label>
+        <select [(ngModel)]="downloadOptions.networkType" class="form-control">
+          <option value="any">Any Connection</option>
+          <option value="wifi-only">WiFi Only</option>
+          <option value="ethernet-only">Ethernet Only</option>
+        </select>
+      </div>
+      
+      <div class="info-box">
+        <p><strong>Estimated Time:</strong> {{ estimateDownloadTime(availableUpdate?.compressedSize || 0) }}</p>
+        <p><strong>Size:</strong> {{ formatBytes(availableUpdate?.compressedSize || 0) }}</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeScheduleModal()">Cancel</button>
+      <button class="btn-primary" (click)="scheduleDownload()">Schedule Download</button>
+    </div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div *ngIf="showChangelogModal" class="modal-overlay" (click)="closeChangelogModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>What's New in {{ availableUpdate?.version }}</h2>
+      <button class="close-btn" (click)="closeChangelogModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <ul class="changelog-list">
+        <li *ngFor="let change of availableUpdate?.changelog">{{ change }}</li>
+      </ul>
+      
+      <div class="changelog-stats">
+        <div class="stat">
+          <span class="stat-value">{{ availableUpdate?.metadata?.newVehicles }}</span>
+          <span class="stat-label">New Vehicles</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">{{ availableUpdate?.metadata?.updatedVehicles }}</span>
+          <span class="stat-label">Updated</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">{{ availableUpdate?.metadata?.totalVehicles }}</span>
+          <span class="stat-label">Total Vehicles</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="closeChangelogModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- History Modal -->
+<div *ngIf="showHistoryModal" class="modal-overlay" (click)="closeHistoryModal()">
+  <div class="modal-content large" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Complete Sync History</h2>
+      <button class="close-btn" (click)="closeHistoryModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Version</th>
+            <th>Date</th>
+            <th>Size</th>
+            <th>Duration</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of syncHistory">
+            <td>
+              <span class="status-icon" [class]="entry.status">
+                {{ entry.status === 'success' ? '✅' : '❌' }}
+              </span>
+            </td>
+            <td>{{ entry.action }}</td>
+            <td>{{ entry.version }}</td>
+            <td>{{ formatDate(entry.timestamp) }}</td>
+            <td>{{ formatBytes(entry.size) }}</td>
+            <td>{{ (entry.duration / 1000).toFixed(0) }}s</td>
+            <td>{{ entry.userName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="closeHistoryModal()">Close</button>
+    </div>
+  </div>
+</div>

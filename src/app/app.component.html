@@ -1,0 +1,9 @@
+<app-header *ngIf="showHeader"></app-header>
+<router-outlet></router-outlet>
+
+<!-- PIN Setup Modal (Global) -->
+<app-pin-setup-modal
+  *ngIf="showPINSetupModal"
+  (setupComplete)="onPINSetupComplete()"
+  (setupSkipped)="onPINSetupSkipped()"
+></app-pin-setup-modal>

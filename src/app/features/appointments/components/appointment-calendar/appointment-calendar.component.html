@@ -1,0 +1,114 @@
+<div class="calendar-container">
+  <!-- Header Section -->
+  <div class="calendar-header">
+    <!-- View Switcher Tabs -->
+    <div class="view-tabs">
+      <button
+        class="view-tab"
+        [class.active]="isViewActive('daily')"
+        (click)="setView('daily')"
+      >
+        Daily
+      </button>
+      <button
+        class="view-tab"
+        [class.active]="isViewActive('weekly')"
+        (click)="setView('weekly')"
+      >
+        Weekly
+      </button>
+      <button
+        class="view-tab"
+        [class.active]="isViewActive('monthly')"
+        (click)="setView('monthly')"
+      >
+        Monthly
+      </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button
+        class="action-button new-button"
+        (click)="createNewAppointment()"
+        title="Create New Appointment"
+      >
+        <span class="button-icon">+</span>
+        <span class="button-text">New Appointment</span>
+      </button>
+      
+      <button
+        class="action-button search-button"
+        (click)="openSearch()"
+        title="Search Appointments"
+      >
+        <span class="button-icon">🔍</span>
+        <span class="button-text">Search</span>
+      </button>
+      
+      <button
+        class="action-button refresh-button"
+        (click)="refreshData()"
+        [disabled]="syncing"
+        title="Refresh Data"
+      >
+        <span class="button-icon" [class.spinning]="syncing">↻</span>
+        <span class="button-text">{{ syncing ? 'Syncing...' : 'Refresh' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navigation-bar">
+    <button
+      class="nav-button prev-button"
+      (click)="previousPeriod()"
+      aria-label="Previous period"
+    >
+      ‹
+    </button>
+
+    <div class="period-display">
+      <h2 class="period-text">{{ getPeriodText() }}</h2>
+    </div>
+
+    <button
+      class="nav-button next-button"
+      (click)="nextPeriod()"
+      aria-label="Next period"
+    >
+      ›
+    </button>
+
+    <button
+      class="today-button"
+      (click)="goToToday()"
+    >
+      Today
+    </button>
+  </div>
+
+  <!-- Calendar View Content -->
+  <div class="calendar-content">
+    <!-- Daily View -->
+    <app-daily-view
+      *ngIf="activeView === 'daily'"
+      [selectedDate]="selectedDate"
+    ></app-daily-view>
+
+    <!-- Weekly View -->
+    <app-weekly-view
+      *ngIf="activeView === 'weekly'"
+      [selectedDate]="selectedDate"
+      (daySelected)="onDaySelected($event)"
+    ></app-weekly-view>
+
+    <!-- Monthly View -->
+    <app-monthly-view
+      *ngIf="activeView === 'monthly'"
+      [selectedDate]="selectedDate"
+      (daySelected)="onDaySelected($event)"
+      (monthChanged)="onMonthChanged($event)"
+    ></app-monthly-view>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="monthly-view-container">
+  <!-- Month Navigation -->
+  <div class="month-navigation">
+    <button 
+      class="nav-button prev-button" 
+      (click)="previousMonth()"
+      aria-label="Previous month"
+    >
+      ‹
+    </button>
+    
+    <h3 class="month-title">{{ getMonthYearText() }}</h3>
+    
+    <button 
+      class="nav-button next-button" 
+      (click)="nextMonth()"
+      aria-label="Next month"
+    >
+      ›
+    </button>
+    
+    <button 
+      class="today-button" 
+      (click)="goToToday()"
+    >
+      Today
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading appointments...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="loadMonthAppointments()">Retry</button>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div *ngIf="!loading && !error" class="calendar-container">
+    <!-- Week Day Headers -->
+    <div class="calendar-header">
+      <div 
+        *ngFor="let day of getWeekDays()" 
+        class="weekday-header"
+      >
+        {{ day }}
+      </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="calendar-grid">
+      <div
+        *ngFor="let day of monthDays"
+        [ngClass]="getDayClass(day)"
+        (click)="onDayClick(day)"
+        [attr.data-intensity]="getIntensityClass(day.appointmentCount)"
+      >
+        <!-- Day Number -->
+        <div class="day-number">
+          {{ day.dayNumber }}
+        </div>
+
+        <!-- Appointment Count Badge -->
+        <div *ngIf="day.appointmentCount > 0 && day.isCurrentMonth" class="appointment-badge">
+          <span class="badge-count">{{ day.appointmentCount }}</span>
+        </div>
+
+        <!-- Color Intensity Indicator -->
+        <div 
+          *ngIf="day.isCurrentMonth" 
+          class="intensity-indicator"
+          [ngClass]="getIntensityClass(day.appointmentCount)"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div *ngIf="!loading && !error" class="legend">
+    <span class="legend-title">Appointment Volume:</span>
+    <div class="legend-items">
+      <div class="legend-item">
+        <div class="legend-box intensity-0"></div>
+        <span>0</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box intensity-1"></div>
+        <span>1-2</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box intensity-2"></div>
+        <span>3-5</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box intensity-3"></div>
+        <span>6-8</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box intensity-4"></div>
+        <span>9-12</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box intensity-5"></div>
+        <span>13+</span>
+      </div>
+    </div>
+  </div>
+</div>

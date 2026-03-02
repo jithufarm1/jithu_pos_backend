@@ -1,0 +1,13 @@
+<div class="work-order-print-container" *ngIf="workOrder">
+  <div class="print-preview" [innerHTML]="workOrderHTML"></div>
+  
+  <div class="print-actions">
+    <button class="btn btn-primary" (click)="print()">
+      🖨️ Print Work Order
+    </button>
+  </div>
+</div>
+
+<div class="empty-state" *ngIf="!workOrder">
+  <p>No work order available</p>
+</div>

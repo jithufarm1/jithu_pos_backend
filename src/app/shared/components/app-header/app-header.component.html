@@ -1,0 +1,84 @@
+<header class="app-header">
+  <div class="header-content">
+    <!-- Left Section: Valvoline Branding & Navigation -->
+    <div class="header-left">
+      <button *ngIf="canGoBack" class="back-btn" (click)="goBack()" title="Go Back">
+        <span class="icon">←</span>
+        <span class="back-text">Back</span>
+      </button>
+      <button class="home-btn" (click)="goHome()" title="Go to Home">
+        <div class="valvoline-mini-logo">
+          <span class="logo-v-red">V</span>
+          <span class="logo-v-blue">V</span>
+        </div>
+        <span class="app-name">Valvoline POS</span>
+      </button>
+    </div>
+
+    <!-- Center Section: Page Title -->
+    <div class="header-center">
+      <ng-content select="[header-title]"></ng-content>
+    </div>
+
+    <!-- Right Section: User Info & Actions -->
+    <div class="header-right">
+      <div class="user-info" (click)="toggleUserMenu()">
+        <div class="user-avatar">
+          <span class="user-icon">👤</span>
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ currentUser?.name }}</span>
+          <span class="user-role">{{ currentUser?.role }}</span>
+        </div>
+        <span class="dropdown-icon">▼</span>
+      </div>
+
+      <!-- User Menu Dropdown -->
+      <div *ngIf="showUserMenu" class="user-menu">
+        <div class="menu-header">
+          <div class="menu-user-info">
+            <div class="menu-user-avatar">👤</div>
+            <div class="menu-user-details">
+              <div class="menu-user-name">{{ currentUser?.name }}</div>
+              <div class="menu-user-role">{{ currentUser?.role }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" (click)="navigateTo('/home')">
+          <span class="menu-icon">🏠</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/tickets')">
+          <span class="menu-icon">🎫</span>
+          <span>Service Tickets</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/customers')">
+          <span class="menu-icon">👥</span>
+          <span>Customers</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/vehicle-search')">
+          <span class="menu-icon">🚗</span>
+          <span>Vehicle Search</span>
+        </div>
+        <div class="menu-item" (click)="navigateTo('/appointments')">
+          <span class="menu-icon">📅</span>
+          <span>Appointments</span>
+        </div>
+        <div *ngIf="isManager()" class="menu-divider"></div>
+        <div *ngIf="isManager()" class="menu-item" (click)="navigateTo('/settings/data-management')">
+          <span class="menu-icon">💾</span>
+          <span>Data Management</span>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item logout" (click)="logout()">
+          <span class="menu-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay to close menu when clicking outside -->
+  <div *ngIf="showUserMenu" class="menu-overlay" (click)="showUserMenu = false"></div>
+</header>

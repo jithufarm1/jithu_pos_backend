@@ -1,0 +1,97 @@
+<div class="customer-search-container">
+  <!-- Header -->
+  <div class="search-header">
+    <h1>Customer Lookup</h1>
+    <button class="btn-primary" (click)="createCustomer()">
+      <span class="icon">+</span>
+      New Customer
+    </button>
+  </div>
+
+  <!-- Search Input -->
+  <div class="search-box">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Search by name, phone, email, VIN, or license plate..."
+      class="search-input"
+      autocomplete="off"
+    />
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Searching customers...</p>
+  </div>
+
+  <!-- Empty State (no search yet) -->
+  <div *ngIf="!hasSearched && !isLoading" class="empty-state">
+    <div class="empty-icon">👥</div>
+    <h2>Search for Customers</h2>
+    <p>Enter a name, phone number, email, VIN, or license plate to find customers</p>
+    <p class="hint">Or create a new customer profile for first-time visitors</p>
+  </div>
+
+  <!-- No Results State -->
+  <div *ngIf="hasSearched && customers.length === 0 && !isLoading" class="no-results-state">
+    <div class="empty-icon">🔍</div>
+    <h2>No Customers Found</h2>
+    <p>No customers match your search criteria</p>
+    <button class="btn-primary" (click)="createCustomer()">
+      Create New Customer
+    </button>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="customers.length > 0 && !isLoading" class="results-container">
+    <div class="results-header">
+      <h3>{{ customers.length }} Customer{{ customers.length !== 1 ? 's' : '' }} Found</h3>
+    </div>
+
+    <div class="customer-list">
+      <div *ngFor="let customer of customers" class="customer-card">
+        <div class="customer-info">
+          <div class="customer-name">
+            {{ customer.name }}
+            <span *ngIf="customer.loyaltyTier" class="loyalty-badge" [class]="'tier-' + customer.loyaltyTier.toLowerCase()">
+              {{ customer.loyaltyTier }}
+            </span>
+          </div>
+          <div class="customer-details">
+            <div class="detail-row">
+              <span class="label">Phone:</span>
+              <span class="value">{{ customer.phone }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Email:</span>
+              <span class="value">{{ customer.email }}</span>
+            </div>
+            <div class="detail-row" *ngIf="customer.primaryVehicle">
+              <span class="label">Primary Vehicle:</span>
+              <span class="value">{{ customer.primaryVehicle }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Total Visits:</span>
+              <span class="value">{{ customer.totalVisits }}</span>
+            </div>
+            <div class="detail-row" *ngIf="customer.lastVisit">
+              <span class="label">Last Visit:</span>
+              <span class="value">{{ customer.lastVisit | date: 'short' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="customer-actions">
+          <button class="btn-secondary" (click)="viewCustomer(customer.id)">
+            View Details
+          </button>
+          <button class="btn-primary" (click)="newService(customer.id)">
+            New Service
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

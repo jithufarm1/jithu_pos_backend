@@ -1,0 +1,192 @@
+[
+  {
+    "vin": "1HGBH41JXMN109186",
+    "year": 2023,
+    "make": "Toyota",
+    "model": "Camry",
+    "engine": "2.5L 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "4.8 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Air Filter Replacement"
+    ],
+    "serviceInterval": 5000
+  },
+  {
+    "vin": "2T1BURHE5JC123456",
+    "year": 2022,
+    "make": "Toyota",
+    "model": "Corolla",
+    "engine": "2.0L 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "4.4 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection"
+    ],
+    "serviceInterval": 5000
+  },
+  {
+    "vin": "2T3ZFREV5JW123789",
+    "year": 2023,
+    "make": "Toyota",
+    "model": "RAV4",
+    "engine": "2.5L 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "4.8 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Brake Inspection"
+    ],
+    "serviceInterval": 5000
+  },
+  {
+    "vin": "1HGCV1F36JA123456",
+    "year": 2023,
+    "make": "Honda",
+    "model": "Accord",
+    "engine": "1.5L Turbo 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "3.7 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Cabin Air Filter Replacement"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "2HGFC2F59JH123456",
+    "year": 2022,
+    "make": "Honda",
+    "model": "Civic",
+    "engine": "2.0L 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "3.7 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "5J6RW2H85JA123456",
+    "year": 2023,
+    "make": "Honda",
+    "model": "CR-V",
+    "engine": "1.5L Turbo 4-Cylinder",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "3.7 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Battery Test"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "1FTFW1E85JFA12345",
+    "year": 2023,
+    "make": "Ford",
+    "model": "F-150",
+    "engine": "5.0L V8",
+    "oilType": "5W-30 Synthetic Blend",
+    "oilCapacity": "8.8 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Brake Inspection",
+      "Fluid Top-Off"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "1FMCU9GD5JUA12345",
+    "year": 2022,
+    "make": "Ford",
+    "model": "Escape",
+    "engine": "1.5L Turbo 4-Cylinder",
+    "oilType": "5W-30 Synthetic Blend",
+    "oilCapacity": "4.3 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "1FM5K8GC5JGA12345",
+    "year": 2023,
+    "make": "Ford",
+    "model": "Explorer",
+    "engine": "2.3L Turbo 4-Cylinder",
+    "oilType": "5W-30 Synthetic Blend",
+    "oilCapacity": "5.7 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Air Filter Replacement"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "1GCUYEED5JZ123456",
+    "year": 2023,
+    "make": "Chevrolet",
+    "model": "Silverado",
+    "engine": "5.3L V8",
+    "oilType": "0W-20 Synthetic",
+    "oilCapacity": "8.0 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Brake Inspection",
+      "Fluid Top-Off"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "2GNAXUEV5J6123456",
+    "year": 2022,
+    "make": "Chevrolet",
+    "model": "Equinox",
+    "engine": "1.5L Turbo 4-Cylinder",
+    "oilType": "5W-30 Synthetic",
+    "oilCapacity": "4.2 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection"
+    ],
+    "serviceInterval": 7500
+  },
+  {
+    "vin": "1G1ZD5ST5JF123456",
+    "year": 2023,
+    "make": "Chevrolet",
+    "model": "Malibu",
+    "engine": "1.5L Turbo 4-Cylinder",
+    "oilType": "5W-30 Synthetic",
+    "oilCapacity": "4.2 quarts",
+    "recommendedServices": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Cabin Air Filter Replacement"
+    ],
+    "serviceInterval": 7500
+  }
+]

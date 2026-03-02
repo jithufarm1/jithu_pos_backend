@@ -1,0 +1,20 @@
+<header class="app-header">
+  <div class="header-content">
+    <div class="header-left">
+      <span class="store-id">{{ storeId }}</span>
+      <span class="divider">|</span>
+      <h1 class="app-title">{{ appTitle }}</h1>
+    </div>
+    <div class="header-right">
+      <div *ngIf="isAuthenticated && currentEmployee" class="employee-info">
+        <span class="employee-name">{{ currentEmployee.name }}</span>
+        <span class="employee-id">({{ currentEmployee.employeeId }})</span>
+        <button class="btn-logout" (click)="onLogout()" title="Logout">
+          <span class="logout-icon">🚪</span>
+          Logout
+        </button>
+      </div>
+      <app-network-status></app-network-status>
+    </div>
+  </div>
+</header>

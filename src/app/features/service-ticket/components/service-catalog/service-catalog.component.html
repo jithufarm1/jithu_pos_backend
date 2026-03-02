@@ -1,0 +1,115 @@
+<div class="service-catalog-container">
+  <div class="catalog-header">
+    <h2>Service Catalog</h2>
+    
+    <!-- Search Box -->
+    <div class="search-box">
+      <input
+        type="text"
+        class="form-control search-input"
+        placeholder="Search services..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange()"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs">
+    <button
+      class="category-tab"
+      [class.active]="selectedCategory === 'All'"
+      (click)="onCategoryChange('All')"
+    >
+      <span class="tab-icon">{{ getCategoryIcon('All') }}</span>
+      <span class="tab-label">All</span>
+    </button>
+    
+    <button
+      *ngFor="let category of categories"
+      class="category-tab"
+      [class.active]="selectedCategory === category"
+      (click)="onCategoryChange(category)"
+    >
+      <span class="tab-icon">{{ getCategoryIcon(category) }}</span>
+      <span class="tab-label">{{ getCategoryLabel(category) }}</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading catalog...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="btn btn-primary" (click)="loadCatalog()">Retry</button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && !error && filteredServices.length === 0" class="empty-state">
+    <div class="empty-icon">🔍</div>
+    <h3>No services found</h3>
+    <p *ngIf="searchQuery">Try adjusting your search criteria.</p>
+    <p *ngIf="!searchQuery && selectedCategory !== 'All'">
+      No services available in this category.
+    </p>
+  </div>
+
+  <!-- Service Grid -->
+  <div *ngIf="!isLoading && !error && filteredServices.length > 0" class="service-grid">
+    <div
+      *ngFor="let service of filteredServices"
+      class="service-card"
+      (click)="selectService(service)"
+    >
+      <div class="service-header">
+        <div class="service-icon">{{ getCategoryIcon(service.category) }}</div>
+        <div class="service-title">
+          <h3>{{ service.name }}</h3>
+          <span class="service-code">{{ service.code }}</span>
+        </div>
+      </div>
+
+      <div class="service-body">
+        <p class="service-description">{{ service.description }}</p>
+        
+        <div class="service-details">
+          <div class="detail-item">
+            <span class="detail-label">Labor Time:</span>
+            <span class="detail-value">{{ formatLaborTime(service.laborMinutes) }}</span>
+          </div>
+          
+          <div class="detail-item" *ngIf="service.requiredParts && service.requiredParts.length > 0">
+            <span class="detail-label">Parts:</span>
+            <span class="detail-value">{{ service.requiredParts.length }} part(s)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-footer">
+        <div class="service-price">
+          <span class="price-label">Price:</span>
+          <span class="price-value">{{ formatCurrency(service.basePrice) }}</span>
+        </div>
+        
+        <button class="btn btn-add" (click)="selectService(service); $event.stopPropagation()">
+          + Add
+        </button>
+      </div>
+
+      <!-- Pricing Tiers Indicator -->
+      <div class="pricing-tiers" *ngIf="service.pricingTiers && service.pricingTiers.length > 0">
+        <span class="tiers-label">Multiple pricing tiers available</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Count -->
+  <div *ngIf="!isLoading && !error && filteredServices.length > 0" class="results-count">
+    Showing {{ filteredServices.length }} service(s)
+  </div>
+</div>

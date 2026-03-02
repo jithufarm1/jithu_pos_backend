@@ -1,0 +1,59 @@
+.work-order-print-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.print-preview {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.print-actions {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+.btn-primary {
+  background: #e31837;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #c41230;
+  box-shadow: 0 4px 8px rgba(227, 24, 55, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .print-preview {
+    max-height: 400px;
+  }
+}

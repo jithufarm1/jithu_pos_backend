@@ -1,0 +1,269 @@
+<div class="ticket-detail-container">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="btn btn-back" (click)="backToList()">
+      Back to List
+    </button>
+    
+    <div class="header-actions">
+      <button
+        *ngIf="canEdit()"
+        class="btn btn-secondary"
+        (click)="editTicket()"
+      >
+        Edit Ticket
+      </button>
+      
+      <button
+        class="btn btn-secondary"
+        (click)="printWorkOrder()"
+        [disabled]="isPrinting"
+      >
+        Print Work Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Status Indicators -->
+  <div class="status-indicators" *ngIf="isOffline || hasPendingSync">
+    <div class="indicator offline" *ngIf="isOffline">
+      <span class="icon">Offline</span>
+      <span>Offline Mode</span>
+    </div>
+    <div class="indicator pending-sync" *ngIf="hasPendingSync">
+      <span class="icon">Sync</span>
+      <span>Pending Synchronization</span>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading ticket...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="btn btn-primary" (click)="backToList()">Back to List</button>
+  </div>
+
+  <!-- Ticket Content -->
+  <div *ngIf="!isLoading && !error && ticket" class="ticket-content">
+    <!-- Ticket Header Card -->
+    <div class="card ticket-header-card">
+      <div class="ticket-title">
+        <h1>Ticket {{ ticket.ticketNumber }}</h1>
+        <span class="status-badge" [ngClass]="getStatusClass(ticket.status)">
+          {{ getStatusLabel(ticket.status) }}
+        </span>
+      </div>
+      
+      <div class="ticket-meta">
+        <div class="meta-item">
+          <span class="label">Created:</span>
+          <span class="value">{{ formatDate(ticket.createdDate) }}</span>
+        </div>
+        <div class="meta-item" *ngIf="ticket.createdBy">
+          <span class="label">Created By:</span>
+          <span class="value">{{ ticket.createdBy }}</span>
+        </div>
+        <div class="meta-item" *ngIf="ticket.assignedTechnicianName">
+          <span class="label">Assigned To:</span>
+          <span class="value">{{ ticket.assignedTechnicianName }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer and Vehicle Info -->
+    <div class="info-grid">
+      <div class="card customer-card">
+        <h2>Customer Information</h2>
+        <div class="info-content">
+          <div class="info-row">
+            <span class="label">Name:</span>
+            <span class="value">{{ ticket.customerName }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Customer ID:</span>
+            <span class="value">{{ ticket.customerId }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card vehicle-card">
+        <h2>Vehicle Information</h2>
+        <div class="info-content">
+          <div class="info-row">
+            <span class="label">Vehicle:</span>
+            <span class="value">{{ ticket.vehicleInfo.year }} {{ ticket.vehicleInfo.make }} {{ ticket.vehicleInfo.model }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">VIN:</span>
+            <span class="value">{{ ticket.vehicleInfo.vin }}</span>
+          </div>
+          <div class="info-row" *ngIf="ticket.vehicleInfo.licensePlate">
+            <span class="label">License Plate:</span>
+            <span class="value">{{ ticket.vehicleInfo.licensePlate }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Current Mileage:</span>
+            <span class="value">{{ ticket.currentMileage | number }} miles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Line Items -->
+    <div class="card services-card">
+      <h2>Services</h2>
+      <div class="services-table">
+        <div class="table-header">
+          <div class="col-service">Service</div>
+          <div class="col-qty">Qty</div>
+          <div class="col-labor">Labor</div>
+          <div class="col-price">Unit Price</div>
+          <div class="col-total">Total</div>
+        </div>
+        
+        <div class="table-row" *ngFor="let item of ticket.lineItems">
+          <div class="col-service">
+            <div class="service-name">{{ item.serviceName }}</div>
+            <div class="service-category">{{ item.category }}</div>
+            <div class="service-notes" *ngIf="item.notes">{{ item.notes }}</div>
+          </div>
+          <div class="col-qty">{{ item.quantity }}</div>
+          <div class="col-labor">{{ formatLaborTime(item.laborMinutes) }}</div>
+          <div class="col-price">{{ formatCurrency(item.unitPrice) }}</div>
+          <div class="col-total">{{ formatCurrency(item.lineTotal) }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parts and Labor Breakdown -->
+    <div class="breakdown-grid">
+      <div class="card parts-card">
+        <h3>Parts Total</h3>
+        <div class="breakdown-amount">{{ formatCurrency(ticket.partsTotal) }}</div>
+      </div>
+      
+      <div class="card labor-card">
+        <h3>Labor Total</h3>
+        <div class="breakdown-amount">{{ formatCurrency(ticket.laborTotal) }}</div>
+        <div class="breakdown-detail">{{ formatLaborTime(ticket.totalLaborMinutes) }}</div>
+      </div>
+    </div>
+
+    <!-- Pricing Summary -->
+    <div class="card pricing-card">
+      <h2>Pricing Summary</h2>
+      <div class="pricing-content">
+        <div class="pricing-row">
+          <span class="label">Subtotal:</span>
+          <span class="value">{{ formatCurrency(ticket.subtotal) }}</span>
+        </div>
+        
+        <div class="pricing-row" *ngIf="ticket.discounts && ticket.discounts.length > 0">
+          <span class="label">Discounts:</span>
+          <span class="value discount">
+            -{{ formatCurrency(getTotalDiscounts()) }}
+          </span>
+        </div>
+        
+        <div class="discount-details" *ngFor="let discount of ticket.discounts">
+          <div class="discount-item">
+            <span class="discount-reason">{{ discount.reason }}</span>
+            <span class="discount-amount">-{{ formatCurrency(discount.amount) }}</span>
+            <span class="discount-approval" *ngIf="discount.requiresApproval && discount.approvedBy">
+              Approved by {{ discount.approvedBy }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="pricing-row">
+          <span class="label">Tax ({{ (ticket.taxRate * 100).toFixed(2) }}%):</span>
+          <span class="value">{{ formatCurrency(ticket.tax) }}</span>
+        </div>
+        
+        <div class="pricing-row total-row">
+          <span class="label">Total:</span>
+          <span class="value total">{{ formatCurrency(ticket.total) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Timeline -->
+    <div class="card timeline-card">
+      <h2>Status Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let entry of ticket.statusHistory">
+          <div class="timeline-marker" [ngClass]="getStatusClass(entry.status)"></div>
+          <div class="timeline-content">
+            <div class="timeline-status">{{ getStatusLabel(entry.status) }}</div>
+            <div class="timeline-meta">
+              <span>{{ formatDate(entry.timestamp) }}</span>
+              <span *ngIf="entry.employeeName"> by {{ entry.employeeName }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="card recommendations-card" *ngIf="recommendations && recommendations.length > 0">
+      <h2>Service Recommendations</h2>
+      <div class="recommendations-list">
+        <div class="recommendation-item" *ngFor="let rec of recommendations">
+          <div class="recommendation-header">
+            <span class="recommendation-name">{{ rec.serviceName }}</span>
+            <span class="priority-badge" [ngClass]="getPriorityClass(rec.priority)">
+              {{ rec.priority }}
+            </span>
+          </div>
+          <div class="recommendation-reason">{{ rec.reason }}</div>
+          <div class="recommendation-meta">
+            <span *ngIf="rec.lastPerformedDate">
+              Last performed: {{ formatDate(rec.lastPerformedDate) }}
+            </span>
+            <span *ngIf="rec.dueAtMileage">
+              Due at: {{ rec.dueAtMileage | number }} miles
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="card notes-card" *ngIf="ticket.notes">
+      <h2>Notes</h2>
+      <p class="notes-content">{{ ticket.notes }}</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button
+        *ngIf="canStartWork()"
+        class="btn btn-primary btn-action"
+        (click)="startWork()"
+        [disabled]="isChangingStatus">
+        Start Work
+      </button>
+      
+      <button
+        *ngIf="canCompleteWork()"
+        class="btn btn-success btn-action"
+        (click)="completeWork()"
+        [disabled]="isChangingStatus">
+        Complete Work
+      </button>
+      
+      <button
+        *ngIf="canMarkPaid()"
+        class="btn btn-success btn-action"
+        (click)="markPaid()"
+        [disabled]="isChangingStatus">
+        Mark as Paid
+      </button>
+    </div>
+  </div>
+</div>

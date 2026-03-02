@@ -1,0 +1,157 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{ isEditMode ? 'Edit Customer' : 'New Customer' }}</h1>
+  </div>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="customer-form">
+    <!-- Validation Summary -->
+    <div class="validation-summary" *ngIf="showValidationSummary && customerForm.invalid">
+      <div class="validation-header">
+        <strong>Please correct the following errors:</strong>
+      </div>
+      <ul>
+        <li *ngIf="customerForm.get('firstName')?.invalid">First name is required</li>
+        <li *ngIf="customerForm.get('lastName')?.invalid">Last name is required</li>
+        <li *ngIf="customerForm.get('email')?.invalid">Valid email is required</li>
+        <li *ngIf="customerForm.get('phone')?.invalid">Phone must be exactly 10 digits (no dashes or spaces)</li>
+        <li *ngIf="customerForm.get('alternatePhone')?.invalid">Alternate phone must be exactly 10 digits (no dashes or spaces)</li>
+        <li *ngIf="customerForm.get('street')?.invalid">Street address is required</li>
+        <li *ngIf="customerForm.get('city')?.invalid">City is required</li>
+        <li *ngIf="customerForm.get('state')?.invalid">State is required</li>
+        <li *ngIf="customerForm.get('zipCode')?.invalid">Valid ZIP code is required (12345 or 12345-6789)</li>
+      </ul>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="form-section">
+      <h2>Personal Information</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" formControlName="firstName" class="form-control">
+          <div class="error" *ngIf="customerForm.get('firstName')?.invalid && customerForm.get('firstName')?.touched">
+            First name is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" formControlName="lastName" class="form-control">
+          <div class="error" *ngIf="customerForm.get('lastName')?.invalid && customerForm.get('lastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" formControlName="email" class="form-control">
+          <div class="error" *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.touched">
+            Valid email is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" formControlName="phone" class="form-control" placeholder="5551234567" maxlength="10">
+          <small class="form-hint">Enter 10 digits only (no dashes or spaces)</small>
+          <div class="error" *ngIf="customerForm.get('phone')?.invalid && customerForm.get('phone')?.touched">
+            10-digit phone number required (digits only)
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Alternate Phone</label>
+          <input type="tel" formControlName="alternatePhone" class="form-control" placeholder="5551234567" maxlength="10">
+          <small class="form-hint">Enter 10 digits only (no dashes or spaces)</small>
+          <div class="error" *ngIf="customerForm.get('alternatePhone')?.invalid && customerForm.get('alternatePhone')?.touched">
+            10-digit phone number required (digits only)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-section">
+      <h2>Address</h2>
+      <div class="form-group">
+        <label>Street Address *</label>
+        <input type="text" formControlName="street" class="form-control">
+        <div class="error" *ngIf="customerForm.get('street')?.invalid && customerForm.get('street')?.touched">
+          Street address is required
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>City *</label>
+          <input type="text" formControlName="city" class="form-control">
+          <div class="error" *ngIf="customerForm.get('city')?.invalid && customerForm.get('city')?.touched">
+            City is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>State *</label>
+          <select formControlName="state" class="form-control">
+            <option value="">Select State</option>
+            <option *ngFor="let state of usStates" [value]="state">{{ state }}</option>
+          </select>
+          <div class="error" *ngIf="customerForm.get('state')?.invalid && customerForm.get('state')?.touched">
+            State is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>ZIP Code *</label>
+          <input type="text" formControlName="zipCode" class="form-control" placeholder="12345" maxlength="10">
+          <small class="form-hint">5 digits or 5+4 format (12345 or 12345-6789)</small>
+          <div class="error" *ngIf="customerForm.get('zipCode')?.invalid && customerForm.get('zipCode')?.touched">
+            Valid ZIP code required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication Preferences -->
+    <div class="form-section">
+      <h2>Communication Preferences</h2>
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="emailNotifications">
+          <span>Email Notifications</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="smsNotifications">
+          <span>SMS Notifications</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="marketingEmails">
+          <span>Marketing Emails</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Preferred Contact Method</label>
+        <select formControlName="preferredContactMethod" class="form-control">
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="sms">SMS</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="form-section">
+      <h2>Notes</h2>
+      <div class="form-group">
+        <textarea formControlName="notes" class="form-control" rows="4" placeholder="Additional notes..."></textarea>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="cancel()" [disabled]="isSaving">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : (isEditMode ? 'Update Customer' : 'Create Customer') }}
+      </button>
+    </div>
+  </form>
+</div>

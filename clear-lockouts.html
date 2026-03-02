@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Login Lockouts - Valvoline POS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #b71c1c;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .success {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+            display: none;
+        }
+        .warning {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔓 Clear Login Lockouts</h1>
+        
+        <div class="info">
+            <strong>What this does:</strong>
+            <p>This tool clears all login attempt records and account lockouts from your browser's localStorage. Use this if you're unable to login due to too many failed attempts.</p>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong>
+            <p>This only clears lockouts on THIS browser. The backend server doesn't store lockout data.</p>
+        </div>
+
+        <button onclick="clearAllLockouts()">Clear All Lockouts</button>
+        <button onclick="clearSpecificLockout()">Clear EMP001 Lockout</button>
+        <button onclick="showCurrentState()">Show Current State</button>
+        <button onclick="clearAllAuth()">Clear All Auth Data</button>
+
+        <div id="success" class="success"></div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function clearAllLockouts() {
+            let cleared = 0;
+            const keys = Object.keys(localStorage);
+            
+            keys.forEach(key => {
+                if (key.startsWith('pos_login_attempts_')) {
+                    localStorage.removeItem(key);
+                    cleared++;
+                }
+            });
+
+            showSuccess(`Cleared ${cleared} lockout record(s)`);
+            showCurrentState();
+        }
+
+        function clearSpecificLockout() {
+            const key = 'pos_login_attempts_EMP001';
+            if (localStorage.getItem(key)) {
+                localStorage.removeItem(key);
+                showSuccess('Cleared EMP001 lockout');
+            } else {
+                showSuccess('No lockout found for EMP001');
+            }
+            showCurrentState();
+        }
+
+        function clearAllAuth() {
+            let cleared = 0;
+            const keys = Object.keys(localStorage);
+            
+            keys.forEach(key => {
+                if (key.startsWith('pos_')) {
+                    localStorage.removeItem(key);
+                    cleared++;
+                }
+            });
+
+            showSuccess(`Cleared ${cleared} auth/lockout record(s). You'll need to login again.`);
+            showCurrentState();
+        }
+
+        function showCurrentState() {
+            const output = document.getElementById('output');
+            const keys = Object.keys(localStorage);
+            const authKeys = keys.filter(k => k.startsWith('pos_'));
+            
+            if (authKeys.length === 0) {
+                output.innerHTML = '<div class="info"><strong>Current State:</strong><p>No POS data in localStorage (clean state)</p></div>';
+                return;
+            }
+
+            let html = '<div class="info"><strong>Current State:</strong><pre>';
+            
+            authKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                try {
+                    const parsed = JSON.parse(value);
+                    html += `\n${key}:\n${JSON.stringify(parsed, null, 2)}\n`;
+                } catch (e) {
+                    html += `\n${key}: ${value}\n`;
+                }
+            });
+            
+            html += '</pre></div>';
+            output.innerHTML = html;
+        }
+
+        function showSuccess(message) {
+            const success = document.getElementById('success');
+            success.textContent = '✅ ' + message;
+            success.style.display = 'block';
+            setTimeout(() => {
+                success.style.display = 'none';
+            }, 5000);
+        }
+
+        // Show current state on load
+        showCurrentState();
+    </script>
+</body>
+</html>

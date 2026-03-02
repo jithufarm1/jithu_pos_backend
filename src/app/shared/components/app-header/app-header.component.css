@@ -1,0 +1,404 @@
+/* Professional Valvoline POS Header */
+.app-header {
+  background: linear-gradient(90deg, #2c4a7c 0%, #2c4a7c 85%, #c8102e 85%, #c8102e 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Left Section */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.back-btn,
+.home-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.back-btn:hover,
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.back-btn:active,
+.home-btn:active {
+  transform: translateY(0);
+}
+
+.back-btn .icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.back-text {
+  font-size: 14px;
+}
+
+.valvoline-mini-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  width: 40px;
+  height: 24px;
+  position: relative;
+  border-radius: 2px;
+}
+
+.logo-v-red {
+  font-size: 20px;
+  font-weight: bold;
+  color: #c8102e;
+  font-family: 'Arial Black', Arial, sans-serif;
+  position: absolute;
+  left: 4px;
+  transform: skewX(-10deg);
+}
+
+.logo-v-blue {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e5aa8;
+  font-family: 'Arial Black', Arial, sans-serif;
+  position: absolute;
+  right: 4px;
+  transform: skewX(-10deg);
+}
+
+.app-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Center Section */
+.header-center {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0 20px;
+}
+
+/* Right Section */
+.header-right {
+  position: relative;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.user-info:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  font-size: 20px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.3;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 11px;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.dropdown-icon {
+  font-size: 10px;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+/* User Menu Dropdown */
+.user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  min-width: 260px;
+  overflow: hidden;
+  z-index: 1001;
+  border: 1px solid #e0e0e0;
+}
+
+.menu-header {
+  background: #f8f9fa;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.menu-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-user-avatar {
+  width: 48px;
+  height: 48px;
+  background: #2c4a7c;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.menu-user-details {
+  flex: 1;
+}
+
+.menu-user-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c4a7c;
+  margin-bottom: 2px;
+}
+
+.menu-user-role {
+  font-size: 12px;
+  color: #666666;
+  background: #e0e0e0;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.menu-item:hover {
+  background: #f0f4f8;
+  color: #2c4a7c;
+}
+
+.menu-item.logout {
+  color: #c8102e;
+  font-weight: 600;
+}
+
+.menu-item.logout:hover {
+  background: #fff5f5;
+}
+
+.menu-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.menu-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 4px 0;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 10px 16px;
+  }
+
+  .app-name {
+    display: none;
+  }
+
+  .user-details {
+    display: none;
+  }
+
+  .dropdown-icon {
+    display: none;
+  }
+
+  .user-info {
+    padding: 8px;
+    min-height: 40px;
+  }
+
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .user-icon {
+    font-size: 18px;
+  }
+
+  .back-btn,
+  .home-btn {
+    padding: 8px 12px;
+  }
+
+  .back-text {
+    display: none;
+  }
+
+  .header-center {
+    font-size: 16px;
+    padding: 0 12px;
+  }
+
+  .valvoline-mini-logo {
+    width: 36px;
+    height: 22px;
+  }
+
+  .logo-v-red,
+  .logo-v-blue {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 8px 12px;
+  }
+
+  .header-left {
+    gap: 8px;
+  }
+
+  .back-btn,
+  .home-btn {
+    padding: 6px 10px;
+  }
+
+  .valvoline-mini-logo {
+    width: 32px;
+    height: 20px;
+  }
+
+  .logo-v-red,
+  .logo-v-blue {
+    font-size: 16px;
+  }
+
+  .header-center {
+    font-size: 14px;
+  }
+
+  .menu-item {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .user-menu {
+    min-width: 240px;
+  }
+}
+
+/* Accessibility */
+.back-btn:focus-visible,
+.home-btn:focus-visible,
+.user-info:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.menu-item:focus-visible {
+  outline: 2px solid #2c4a7c;
+  outline-offset: -2px;
+}
+
+/* Print Styles */
+@media print {
+  .app-header {
+    background: #2c4a7c;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .user-menu,
+  .menu-overlay {
+    display: none;
+  }
+}

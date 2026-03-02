@@ -1,0 +1,1918 @@
+{
+  "vehicles": [
+    {
+      "vin": "1HGBH41JXMN109186",
+      "year": 2023,
+      "make": "Toyota",
+      "model": "Camry",
+      "engine": "2.5L 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "4.8 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Air Filter Replacement"
+      ],
+      "serviceInterval": 5000
+    },
+    {
+      "vin": "2T1BURHE5JC123456",
+      "year": 2022,
+      "make": "Toyota",
+      "model": "Corolla",
+      "engine": "2.0L 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "4.4 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection"
+      ],
+      "serviceInterval": 5000
+    },
+    {
+      "vin": "2T3ZFREV5JW123789",
+      "year": 2023,
+      "make": "Toyota",
+      "model": "RAV4",
+      "engine": "2.5L 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "4.8 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Brake Inspection"
+      ],
+      "serviceInterval": 5000
+    },
+    {
+      "vin": "1HGCV1F36JA123456",
+      "year": 2023,
+      "make": "Honda",
+      "model": "Accord",
+      "engine": "1.5L Turbo 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "3.7 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Cabin Air Filter Replacement"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "2HGFC2F59JH123456",
+      "year": 2022,
+      "make": "Honda",
+      "model": "Civic",
+      "engine": "2.0L 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "3.7 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "5J6RW2H85JA123456",
+      "year": 2023,
+      "make": "Honda",
+      "model": "CR-V",
+      "engine": "1.5L Turbo 4-Cylinder",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "3.7 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Battery Test"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "1FTFW1E85JFA12345",
+      "year": 2023,
+      "make": "Ford",
+      "model": "F-150",
+      "engine": "5.0L V8",
+      "oilType": "5W-30 Synthetic Blend",
+      "oilCapacity": "8.8 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Brake Inspection",
+        "Fluid Top-Off"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "1FMCU9GD5JUA12345",
+      "year": 2022,
+      "make": "Ford",
+      "model": "Escape",
+      "engine": "1.5L Turbo 4-Cylinder",
+      "oilType": "5W-30 Synthetic Blend",
+      "oilCapacity": "4.3 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "1FM5K8GC5JGA12345",
+      "year": 2023,
+      "make": "Ford",
+      "model": "Explorer",
+      "engine": "2.3L Turbo 4-Cylinder",
+      "oilType": "5W-30 Synthetic Blend",
+      "oilCapacity": "5.7 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Air Filter Replacement"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "1GCUYEED5JZ123456",
+      "year": 2023,
+      "make": "Chevrolet",
+      "model": "Silverado",
+      "engine": "5.3L V8",
+      "oilType": "0W-20 Synthetic",
+      "oilCapacity": "8.0 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Brake Inspection",
+        "Fluid Top-Off"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "2GNAXUEV5J6123456",
+      "year": 2022,
+      "make": "Chevrolet",
+      "model": "Equinox",
+      "engine": "1.5L Turbo 4-Cylinder",
+      "oilType": "5W-30 Synthetic",
+      "oilCapacity": "4.2 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection"
+      ],
+      "serviceInterval": 7500
+    },
+    {
+      "vin": "1G1ZD5ST5JF123456",
+      "year": 2023,
+      "make": "Chevrolet",
+      "model": "Malibu",
+      "engine": "1.5L Turbo 4-Cylinder",
+      "oilType": "5W-30 Synthetic",
+      "oilCapacity": "4.2 quarts",
+      "recommendedServices": [
+        "Oil Change",
+        "Tire Rotation",
+        "Multi-Point Inspection",
+        "Cabin Air Filter Replacement"
+      ],
+      "serviceInterval": 7500
+    }
+  ],
+  "reference-data": {
+    "makes": [
+      {
+        "id": "toyota",
+        "name": "Toyota",
+        "models": [
+          {
+            "id": "camry",
+            "name": "Camry",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "corolla",
+            "name": "Corolla",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "rav4",
+            "name": "RAV4",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          }
+        ]
+      },
+      {
+        "id": "honda",
+        "name": "Honda",
+        "models": [
+          {
+            "id": "accord",
+            "name": "Accord",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "civic",
+            "name": "Civic",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "crv",
+            "name": "CR-V",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ford",
+        "name": "Ford",
+        "models": [
+          {
+            "id": "f150",
+            "name": "F-150",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "escape",
+            "name": "Escape",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "explorer",
+            "name": "Explorer",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chevrolet",
+        "name": "Chevrolet",
+        "models": [
+          {
+            "id": "silverado",
+            "name": "Silverado",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "equinox",
+            "name": "Equinox",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          },
+          {
+            "id": "malibu",
+            "name": "Malibu",
+            "years": [
+              2024,
+              2023,
+              2022,
+              2021,
+              2020,
+              2019,
+              2018,
+              2017,
+              2016,
+              2015
+            ]
+          }
+        ]
+      }
+    ],
+    "engines": [
+      "2.5L 4-Cylinder",
+      "3.5L V6",
+      "2.0L Turbo 4-Cylinder",
+      "5.0L V8",
+      "3.6L V6",
+      "1.5L Turbo 4-Cylinder",
+      "2.4L 4-Cylinder",
+      "Hybrid 2.5L 4-Cylinder"
+    ],
+    "serviceTypes": [
+      "Oil Change",
+      "Tire Rotation",
+      "Multi-Point Inspection",
+      "Brake Inspection",
+      "Air Filter Replacement",
+      "Cabin Air Filter Replacement",
+      "Battery Test",
+      "Fluid Top-Off",
+      "Wiper Blade Replacement"
+    ],
+    "lastUpdated": "2024-02-24T10:00:00Z"
+  },
+  "customers": [
+    {
+      "id": "CUST-001",
+      "firstName": "Michael",
+      "lastName": "Johnson",
+      "email": "michael.johnson@email.com",
+      "phone": "5551234567",
+      "address": {
+        "street": "123 Main St",
+        "city": "Austin",
+        "state": "TX",
+        "zipCode": "78701",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": true,
+        "smsNotifications": true,
+        "marketingEmails": true,
+        "preferredContactMethod": "email",
+        "preferredLanguage": "en"
+      },
+      "loyaltyProgram": {
+        "memberId": "LOY-001",
+        "points": 3500,
+        "tier": "Gold",
+        "joinDate": "2023-01-15T00:00:00Z"
+      },
+      "createdDate": "2023-01-15T00:00:00Z",
+      "lastVisitDate": "2024-02-20T14:30:00Z",
+      "totalVisits": 12,
+      "totalSpent": 1450.5,
+      "vehicles": [
+        {
+          "id": "VEH-001",
+          "vin": "1HGBH41JXMN109186",
+          "year": 2023,
+          "make": "Toyota",
+          "model": "Camry",
+          "engine": "2.5L 4-Cylinder",
+          "licensePlate": "ABC1234",
+          "color": "Silver",
+          "mileage": 15000,
+          "isPrimary": true,
+          "addedDate": "2023-01-15T00:00:00Z",
+          "lastServiceDate": "2024-02-20T14:30:00Z",
+          "serviceHistory": []
+        }
+      ],
+      "notes": "testing four"
+    },
+    {
+      "id": "CUST-002",
+      "firstName": "Sarah",
+      "lastName": "Williams",
+      "email": "sarah.williams@email.com",
+      "phone": "5559876543",
+      "address": {
+        "street": "456 Oak Ave",
+        "city": "Dallas",
+        "state": "TX",
+        "zipCode": "75201",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": true,
+        "smsNotifications": false,
+        "marketingEmails": false,
+        "preferredContactMethod": "phone",
+        "preferredLanguage": "en"
+      },
+      "loyaltyProgram": {
+        "memberId": "LOY-002",
+        "points": 1200,
+        "tier": "Silver",
+        "joinDate": "2023-03-20T00:00:00Z"
+      },
+      "createdDate": "2023-03-20T00:00:00Z",
+      "lastVisitDate": "2024-02-18T10:15:00Z",
+      "totalVisits": 8,
+      "totalSpent": 890.25,
+      "vehicles": [
+        {
+          "id": "VEH-002",
+          "vin": "1HGCV1F36JA123456",
+          "year": 2023,
+          "make": "Honda",
+          "model": "Accord",
+          "engine": "1.5L Turbo 4-Cylinder",
+          "licensePlate": "XYZ5678",
+          "color": "Blue",
+          "mileage": 12000,
+          "isPrimary": true,
+          "addedDate": "2023-03-20T00:00:00Z",
+          "lastServiceDate": "2024-02-18T10:15:00Z",
+          "serviceHistory": []
+        }
+      ]
+    },
+    {
+      "id": "CUST-003",
+      "firstName": "Robert",
+      "lastName": "Davis",
+      "email": "robert.davis@email.com",
+      "phone": "5555551234",
+      "address": {
+        "street": "789 Pine Rd",
+        "city": "Houston",
+        "state": "TX",
+        "zipCode": "77001",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": true,
+        "smsNotifications": true,
+        "marketingEmails": true,
+        "preferredContactMethod": "sms",
+        "preferredLanguage": "en"
+      },
+      "loyaltyProgram": {
+        "memberId": "LOY-003",
+        "points": 5500,
+        "tier": "Platinum",
+        "joinDate": "2022-06-10T00:00:00Z"
+      },
+      "createdDate": "2022-06-10T00:00:00Z",
+      "lastVisitDate": "2024-02-22T16:45:00Z",
+      "totalVisits": 18,
+      "totalSpent": 2340.75,
+      "vehicles": [
+        {
+          "id": "VEH-003",
+          "vin": "1FTFW1E85JFA12345",
+          "year": 2023,
+          "make": "Ford",
+          "model": "F-150",
+          "engine": "5.0L V8",
+          "licensePlate": "TRK9999",
+          "color": "Black",
+          "mileage": 25000,
+          "isPrimary": true,
+          "addedDate": "2022-06-10T00:00:00Z",
+          "lastServiceDate": "2024-02-22T16:45:00Z",
+          "serviceHistory": []
+        },
+        {
+          "id": "VEH-004",
+          "vin": "2T1BURHE5JC123456",
+          "year": 2022,
+          "make": "Toyota",
+          "model": "Corolla",
+          "engine": "2.0L 4-Cylinder",
+          "licensePlate": "CAR5555",
+          "color": "White",
+          "mileage": 18000,
+          "isPrimary": false,
+          "addedDate": "2023-08-15T00:00:00Z",
+          "lastServiceDate": "2024-01-10T09:30:00Z",
+          "serviceHistory": []
+        }
+      ]
+    },
+    {
+      "id": "CUST-004",
+      "firstName": "Jennifer",
+      "lastName": "Martinez",
+      "email": "jennifer.martinez@email.com",
+      "phone": "5552223333",
+      "address": {
+        "street": "321 Elm St",
+        "city": "San Antonio",
+        "state": "TX",
+        "zipCode": "78201",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": true,
+        "smsNotifications": true,
+        "marketingEmails": true,
+        "preferredContactMethod": "email",
+        "preferredLanguage": "en"
+      },
+      "createdDate": "2024-01-05T00:00:00Z",
+      "lastVisitDate": "2024-02-15T11:20:00Z",
+      "totalVisits": 3,
+      "totalSpent": 345,
+      "vehicles": [
+        {
+          "id": "VEH-005",
+          "vin": "2T3ZFREV5JW123789",
+          "year": 2023,
+          "make": "Toyota",
+          "model": "RAV4",
+          "engine": "2.5L 4-Cylinder",
+          "licensePlate": "SUV7777",
+          "color": "Red",
+          "mileage": 8000,
+          "isPrimary": true,
+          "addedDate": "2024-01-05T00:00:00Z",
+          "lastServiceDate": "2024-02-15T11:20:00Z",
+          "serviceHistory": []
+        }
+      ]
+    },
+    {
+      "id": "CUST-005",
+      "firstName": "David",
+      "lastName": "Brown",
+      "email": "david.brown@email.com",
+      "phone": "5554445555",
+      "address": {
+        "street": "654 Maple Dr",
+        "city": "Fort Worth",
+        "state": "TX",
+        "zipCode": "76101",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": false,
+        "smsNotifications": true,
+        "marketingEmails": false,
+        "preferredContactMethod": "phone",
+        "preferredLanguage": "en"
+      },
+      "loyaltyProgram": {
+        "memberId": "LOY-005",
+        "points": 750,
+        "tier": "Bronze",
+        "joinDate": "2023-11-01T00:00:00Z"
+      },
+      "createdDate": "2023-11-01T00:00:00Z",
+      "lastVisitDate": "2024-02-10T13:00:00Z",
+      "totalVisits": 5,
+      "totalSpent": 625.5,
+      "vehicles": [
+        {
+          "id": "VEH-006",
+          "vin": "5J6RW2H85JA123456",
+          "year": 2023,
+          "make": "Honda",
+          "model": "CR-V",
+          "engine": "1.5L Turbo 4-Cylinder",
+          "licensePlate": "CRV2024",
+          "color": "Gray",
+          "mileage": 10000,
+          "isPrimary": true,
+          "addedDate": "2023-11-01T00:00:00Z",
+          "lastServiceDate": "2024-02-10T13:00:00Z",
+          "serviceHistory": []
+        }
+      ]
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Customer",
+      "email": "test@example.com",
+      "phone": "5551234567",
+      "address": {
+        "street": "123 Main St",
+        "city": "Columbus",
+        "state": "OH",
+        "zipCode": "43215",
+        "country": "USA"
+      },
+      "preferences": {
+        "emailNotifications": true,
+        "smsNotifications": true,
+        "marketingEmails": true,
+        "preferredContactMethod": "email",
+        "preferredLanguage": "en"
+      },
+      "id": "CUST-1772097605820",
+      "createdDate": "2026-02-26T09:20:05.820Z",
+      "totalVisits": 0,
+      "totalSpent": 0,
+      "vehicles": []
+    }
+  ],
+  "service-catalog": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-02-27T00:00:00Z",
+    "categories": [
+      {
+        "category": "Oil_Change",
+        "displayName": "Oil Change",
+        "description": "Oil change services for all vehicle types",
+        "icon": "🛢️",
+        "sortOrder": 1
+      },
+      {
+        "category": "Fluid_Services",
+        "displayName": "Fluid Services",
+        "description": "Transmission, coolant, brake, and power steering fluids",
+        "icon": "💧",
+        "sortOrder": 2
+      },
+      {
+        "category": "Filters",
+        "displayName": "Filters",
+        "description": "Air, cabin, and fuel filter replacements",
+        "icon": "🔧",
+        "sortOrder": 3
+      },
+      {
+        "category": "Battery",
+        "displayName": "Battery",
+        "description": "Battery testing, replacement, and maintenance",
+        "icon": "🔋",
+        "sortOrder": 4
+      },
+      {
+        "category": "Wipers",
+        "displayName": "Wipers",
+        "description": "Wiper blade replacement and maintenance",
+        "icon": "🌧️",
+        "sortOrder": 5
+      },
+      {
+        "category": "Lights",
+        "displayName": "Lights",
+        "description": "Headlight, taillight, and bulb replacements",
+        "icon": "💡",
+        "sortOrder": 6
+      },
+      {
+        "category": "Tires",
+        "displayName": "Tires",
+        "description": "Tire pressure, rotation, and inspection",
+        "icon": "🛞",
+        "sortOrder": 7
+      },
+      {
+        "category": "Inspection",
+        "displayName": "Inspection",
+        "description": "Multi-point inspections and diagnostics",
+        "icon": "🔍",
+        "sortOrder": 8
+      }
+    ],
+    "services": [
+      {
+        "id": "SVC-001",
+        "code": "OC-CONV",
+        "name": "Conventional Oil Change",
+        "category": "Oil_Change",
+        "description": "Standard oil change with conventional motor oil (up to 5 quarts)",
+        "basePrice": 39.99,
+        "partsCost": 20,
+        "laborCost": 19.99,
+        "laborMinutes": 20,
+        "tags": [
+          "oil",
+          "maintenance",
+          "basic"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-002",
+        "code": "OC-BLEND",
+        "name": "Synthetic Blend Oil Change",
+        "category": "Oil_Change",
+        "description": "Oil change with synthetic blend motor oil (up to 5 quarts)",
+        "basePrice": 54.99,
+        "partsCost": 30,
+        "laborCost": 24.99,
+        "laborMinutes": 20,
+        "tags": [
+          "oil",
+          "maintenance",
+          "synthetic-blend"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-003",
+        "code": "OC-FULL-SYN",
+        "name": "Full Synthetic Oil Change",
+        "category": "Oil_Change",
+        "description": "Premium oil change with full synthetic motor oil (up to 5 quarts)",
+        "basePrice": 79.99,
+        "partsCost": 50,
+        "laborCost": 29.99,
+        "laborMinutes": 20,
+        "tags": [
+          "oil",
+          "maintenance",
+          "synthetic",
+          "premium"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-004",
+        "code": "OC-HIGH-MILE",
+        "name": "High Mileage Oil Change",
+        "category": "Oil_Change",
+        "description": "Specialized oil change for vehicles with 75,000+ miles",
+        "basePrice": 69.99,
+        "partsCost": 40,
+        "laborCost": 29.99,
+        "laborMinutes": 25,
+        "tags": [
+          "oil",
+          "maintenance",
+          "high-mileage"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-005",
+        "code": "OC-DIESEL",
+        "name": "Diesel Oil Change",
+        "category": "Oil_Change",
+        "description": "Oil change for diesel engines (up to 10 quarts)",
+        "basePrice": 89.99,
+        "partsCost": 55,
+        "laborCost": 34.99,
+        "laborMinutes": 30,
+        "tags": [
+          "oil",
+          "maintenance",
+          "diesel"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-006",
+        "code": "OC-EUROPEAN",
+        "name": "European Vehicle Oil Change",
+        "category": "Oil_Change",
+        "description": "Specialized oil change for European vehicles",
+        "basePrice": 99.99,
+        "partsCost": 65,
+        "laborCost": 34.99,
+        "laborMinutes": 30,
+        "tags": [
+          "oil",
+          "maintenance",
+          "european",
+          "premium"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-007",
+        "code": "FLUID-TRANS",
+        "name": "Transmission Fluid Exchange",
+        "category": "Fluid_Services",
+        "description": "Complete transmission fluid exchange service",
+        "basePrice": 179.99,
+        "partsCost": 120,
+        "laborCost": 59.99,
+        "laborMinutes": 45,
+        "tags": [
+          "fluid",
+          "transmission",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-008",
+        "code": "FLUID-COOLANT",
+        "name": "Coolant Flush",
+        "category": "Fluid_Services",
+        "description": "Complete cooling system flush and fill",
+        "basePrice": 129.99,
+        "partsCost": 75,
+        "laborCost": 54.99,
+        "laborMinutes": 40,
+        "tags": [
+          "fluid",
+          "coolant",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-009",
+        "code": "FLUID-BRAKE",
+        "name": "Brake Fluid Exchange",
+        "category": "Fluid_Services",
+        "description": "Complete brake fluid exchange service",
+        "basePrice": 99.99,
+        "partsCost": 50,
+        "laborCost": 49.99,
+        "laborMinutes": 35,
+        "tags": [
+          "fluid",
+          "brake",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-010",
+        "code": "FLUID-PS",
+        "name": "Power Steering Fluid Exchange",
+        "category": "Fluid_Services",
+        "description": "Power steering fluid exchange service",
+        "basePrice": 89.99,
+        "partsCost": 45,
+        "laborCost": 44.99,
+        "laborMinutes": 30,
+        "tags": [
+          "fluid",
+          "power-steering",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-011",
+        "code": "FLUID-DIFF",
+        "name": "Differential Fluid Service",
+        "category": "Fluid_Services",
+        "description": "Differential fluid drain and fill",
+        "basePrice": 119.99,
+        "partsCost": 70,
+        "laborCost": 49.99,
+        "laborMinutes": 35,
+        "tags": [
+          "fluid",
+          "differential",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-012",
+        "code": "FLUID-WINDSHIELD",
+        "name": "Windshield Washer Fluid Top-Off",
+        "category": "Fluid_Services",
+        "description": "Windshield washer fluid refill",
+        "basePrice": 9.99,
+        "partsCost": 5,
+        "laborCost": 4.99,
+        "laborMinutes": 5,
+        "tags": [
+          "fluid",
+          "windshield",
+          "basic"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-013",
+        "code": "FILTER-ENGINE-AIR",
+        "name": "Engine Air Filter Replacement",
+        "category": "Filters",
+        "description": "Replace engine air filter",
+        "basePrice": 39.99,
+        "partsCost": 25,
+        "laborCost": 14.99,
+        "laborMinutes": 10,
+        "tags": [
+          "filter",
+          "air",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-014",
+        "code": "FILTER-CABIN-AIR",
+        "name": "Cabin Air Filter Replacement",
+        "category": "Filters",
+        "description": "Replace cabin air filter for improved air quality",
+        "basePrice": 44.99,
+        "partsCost": 30,
+        "laborCost": 14.99,
+        "laborMinutes": 10,
+        "tags": [
+          "filter",
+          "cabin",
+          "air-quality"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-015",
+        "code": "FILTER-FUEL",
+        "name": "Fuel Filter Replacement",
+        "category": "Filters",
+        "description": "Replace fuel filter",
+        "basePrice": 79.99,
+        "partsCost": 45,
+        "laborCost": 34.99,
+        "laborMinutes": 25,
+        "tags": [
+          "filter",
+          "fuel",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-016",
+        "code": "FILTER-OIL",
+        "name": "Oil Filter Replacement",
+        "category": "Filters",
+        "description": "Replace oil filter (included with oil change)",
+        "basePrice": 19.99,
+        "partsCost": 12,
+        "laborCost": 7.99,
+        "laborMinutes": 5,
+        "tags": [
+          "filter",
+          "oil",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-017",
+        "code": "BATT-TEST",
+        "name": "Battery Test",
+        "category": "Battery",
+        "description": "Complete battery and charging system test",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 10,
+        "tags": [
+          "battery",
+          "test",
+          "free"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-018",
+        "code": "BATT-REPLACE-STD",
+        "name": "Standard Battery Replacement",
+        "category": "Battery",
+        "description": "Replace standard automotive battery",
+        "basePrice": 149.99,
+        "partsCost": 100,
+        "laborCost": 49.99,
+        "laborMinutes": 20,
+        "tags": [
+          "battery",
+          "replacement"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-019",
+        "code": "BATT-REPLACE-PREM",
+        "name": "Premium Battery Replacement",
+        "category": "Battery",
+        "description": "Replace premium automotive battery with extended warranty",
+        "basePrice": 199.99,
+        "partsCost": 140,
+        "laborCost": 59.99,
+        "laborMinutes": 20,
+        "tags": [
+          "battery",
+          "replacement",
+          "premium"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-020",
+        "code": "BATT-CLEAN",
+        "name": "Battery Terminal Cleaning",
+        "category": "Battery",
+        "description": "Clean battery terminals and cable connections",
+        "basePrice": 29.99,
+        "partsCost": 5,
+        "laborCost": 24.99,
+        "laborMinutes": 15,
+        "tags": [
+          "battery",
+          "cleaning",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-021",
+        "code": "WIPER-FRONT",
+        "name": "Front Wiper Blade Replacement",
+        "category": "Wipers",
+        "description": "Replace front wiper blades (pair)",
+        "basePrice": 34.99,
+        "partsCost": 22,
+        "laborCost": 12.99,
+        "laborMinutes": 10,
+        "tags": [
+          "wipers",
+          "replacement",
+          "visibility"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-022",
+        "code": "WIPER-REAR",
+        "name": "Rear Wiper Blade Replacement",
+        "category": "Wipers",
+        "description": "Replace rear wiper blade",
+        "basePrice": 19.99,
+        "partsCost": 12,
+        "laborCost": 7.99,
+        "laborMinutes": 5,
+        "tags": [
+          "wipers",
+          "replacement",
+          "visibility"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-023",
+        "code": "WIPER-ALL",
+        "name": "Complete Wiper Blade Set",
+        "category": "Wipers",
+        "description": "Replace all wiper blades (front and rear)",
+        "basePrice": 49.99,
+        "partsCost": 32,
+        "laborCost": 17.99,
+        "laborMinutes": 15,
+        "tags": [
+          "wipers",
+          "replacement",
+          "visibility",
+          "package"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-024",
+        "code": "LIGHT-HEADLIGHT",
+        "name": "Headlight Bulb Replacement",
+        "category": "Lights",
+        "description": "Replace headlight bulb (single)",
+        "basePrice": 29.99,
+        "partsCost": 15,
+        "laborCost": 14.99,
+        "laborMinutes": 15,
+        "tags": [
+          "lights",
+          "headlight",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-025",
+        "code": "LIGHT-TAILLIGHT",
+        "name": "Taillight Bulb Replacement",
+        "category": "Lights",
+        "description": "Replace taillight bulb (single)",
+        "basePrice": 24.99,
+        "partsCost": 10,
+        "laborCost": 14.99,
+        "laborMinutes": 10,
+        "tags": [
+          "lights",
+          "taillight",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-026",
+        "code": "LIGHT-BRAKE",
+        "name": "Brake Light Bulb Replacement",
+        "category": "Lights",
+        "description": "Replace brake light bulb (single)",
+        "basePrice": 19.99,
+        "partsCost": 8,
+        "laborCost": 11.99,
+        "laborMinutes": 10,
+        "tags": [
+          "lights",
+          "brake",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-027",
+        "code": "LIGHT-TURN",
+        "name": "Turn Signal Bulb Replacement",
+        "category": "Lights",
+        "description": "Replace turn signal bulb (single)",
+        "basePrice": 19.99,
+        "partsCost": 8,
+        "laborCost": 11.99,
+        "laborMinutes": 10,
+        "tags": [
+          "lights",
+          "turn-signal",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-028",
+        "code": "LIGHT-RESTORE",
+        "name": "Headlight Restoration",
+        "category": "Lights",
+        "description": "Restore cloudy or yellowed headlight lenses",
+        "basePrice": 79.99,
+        "partsCost": 25,
+        "laborCost": 54.99,
+        "laborMinutes": 45,
+        "tags": [
+          "lights",
+          "restoration",
+          "visibility"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-029",
+        "code": "TIRE-PRESSURE",
+        "name": "Tire Pressure Check",
+        "category": "Tires",
+        "description": "Check and adjust tire pressure to manufacturer specs",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 10,
+        "tags": [
+          "tires",
+          "pressure",
+          "free",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-030",
+        "code": "TIRE-ROTATION",
+        "name": "Tire Rotation",
+        "category": "Tires",
+        "description": "Rotate tires for even wear",
+        "basePrice": 29.99,
+        "partsCost": 0,
+        "laborCost": 29.99,
+        "laborMinutes": 25,
+        "tags": [
+          "tires",
+          "rotation",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-031",
+        "code": "TIRE-BALANCE",
+        "name": "Tire Balance",
+        "category": "Tires",
+        "description": "Balance all four tires",
+        "basePrice": 59.99,
+        "partsCost": 10,
+        "laborCost": 49.99,
+        "laborMinutes": 30,
+        "tags": [
+          "tires",
+          "balance",
+          "maintenance"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-032",
+        "code": "TIRE-INSPECT",
+        "name": "Tire Inspection",
+        "category": "Tires",
+        "description": "Complete tire inspection including tread depth and wear patterns",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 15,
+        "tags": [
+          "tires",
+          "inspection",
+          "free",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-033",
+        "code": "INSP-MULTI-POINT",
+        "name": "Multi-Point Inspection",
+        "category": "Inspection",
+        "description": "Comprehensive 18-point vehicle inspection",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 20,
+        "tags": [
+          "inspection",
+          "free",
+          "comprehensive"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-034",
+        "code": "INSP-BRAKE",
+        "name": "Brake Inspection",
+        "category": "Inspection",
+        "description": "Complete brake system inspection",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 15,
+        "tags": [
+          "inspection",
+          "brake",
+          "free",
+          "safety"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-035",
+        "code": "INSP-ALIGNMENT",
+        "name": "Alignment Check",
+        "category": "Inspection",
+        "description": "Check wheel alignment",
+        "basePrice": 0,
+        "partsCost": 0,
+        "laborCost": 0,
+        "laborMinutes": 15,
+        "tags": [
+          "inspection",
+          "alignment",
+          "free"
+        ],
+        "isActive": true
+      },
+      {
+        "id": "SVC-036",
+        "code": "INSP-DIAGNOSTIC",
+        "name": "Diagnostic Scan",
+        "category": "Inspection",
+        "description": "Computer diagnostic scan for check engine light",
+        "basePrice": 49.99,
+        "partsCost": 0,
+        "laborCost": 49.99,
+        "laborMinutes": 20,
+        "tags": [
+          "inspection",
+          "diagnostic",
+          "check-engine"
+        ],
+        "isActive": true
+      }
+    ]
+  },
+  "tickets": [
+    {
+      "customerId": "CUST-003",
+      "customerName": "Robert Davis",
+      "vehicleId": "VEH-003",
+      "vehicleInfo": {
+        "id": "VEH-003",
+        "vin": "1FTFW1E85JFA12345",
+        "year": 2023,
+        "make": "Ford",
+        "model": "F-150",
+        "licensePlate": "TRK9999"
+      },
+      "currentMileage": 2345345,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-001",
+          "serviceName": "Conventional Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 39.99,
+          "lineTotal": 39.99,
+          "partsCost": 20,
+          "laborCost": 19.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-003",
+          "serviceName": "Full Synthetic Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "lineTotal": 79.99,
+          "partsCost": 50,
+          "laborCost": 29.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-018",
+          "serviceName": "Standard Battery Replacement",
+          "category": "Battery",
+          "quantity": 1,
+          "unitPrice": 149.99,
+          "lineTotal": 149.99,
+          "partsCost": 100,
+          "laborCost": 49.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-031",
+          "serviceName": "Tire Balance",
+          "category": "Tires",
+          "quantity": 1,
+          "unitPrice": 59.99,
+          "lineTotal": 59.99,
+          "partsCost": 10,
+          "laborCost": 49.99,
+          "laborMinutes": 30
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-036",
+          "serviceName": "Diagnostic Scan",
+          "category": "Inspection",
+          "quantity": 1,
+          "unitPrice": 49.99,
+          "lineTotal": 49.99,
+          "partsCost": 0,
+          "laborCost": 49.99,
+          "laborMinutes": 20
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T45783142",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 379.95,
+      "tax": 30.4,
+      "taxRate": 0.08,
+      "total": 410.35,
+      "partsTotal": 180,
+      "laborTotal": 199.95,
+      "totalLaborMinutes": 110,
+      "createdDate": "2026-03-01T06:16:23.145Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-03-01T06:16:23.150Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772345783142"
+    },
+    {
+      "customerId": "CUST-002",
+      "customerName": "undefined undefined",
+      "vehicleId": "VEH-002",
+      "vehicleInfo": {
+        "id": "VEH-002",
+        "vin": "1HGCV1F36JA123456",
+        "year": 2023,
+        "make": "Honda",
+        "model": "Accord",
+        "licensePlate": "XYZ5678"
+      },
+      "currentMileage": 23,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-006",
+          "serviceName": "European Vehicle Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 99.99,
+          "lineTotal": 99.99,
+          "partsCost": 65,
+          "laborCost": 34.99,
+          "laborMinutes": 30
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T83622991",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 99.99,
+      "tax": 8,
+      "taxRate": 0.08,
+      "total": 107.99,
+      "partsTotal": 65,
+      "laborTotal": 34.99,
+      "totalLaborMinutes": 30,
+      "createdDate": "2026-02-27T09:13:42.991Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-02-27T09:13:42.991Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772183622991"
+    },
+    {
+      "customerId": "CUST-002",
+      "customerName": "undefined undefined",
+      "vehicleId": "VEH-002",
+      "vehicleInfo": {
+        "id": "VEH-002",
+        "vin": "1HGCV1F36JA123456",
+        "year": 2023,
+        "make": "Honda",
+        "model": "Accord",
+        "licensePlate": "XYZ5678"
+      },
+      "currentMileage": 2343,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-002",
+          "serviceName": "Synthetic Blend Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 54.99,
+          "lineTotal": 54.99,
+          "partsCost": 30,
+          "laborCost": 24.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-003",
+          "serviceName": "Full Synthetic Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "lineTotal": 79.99,
+          "partsCost": 50,
+          "laborCost": 29.99,
+          "laborMinutes": 20
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T83084529",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 134.98,
+      "tax": 10.8,
+      "taxRate": 0.08,
+      "total": 145.78,
+      "partsTotal": 80,
+      "laborTotal": 54.98,
+      "totalLaborMinutes": 40,
+      "createdDate": "2026-02-27T09:04:44.529Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-02-27T09:04:44.529Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772183084529"
+    },
+    {
+      "customerId": "CUST-005",
+      "customerName": "undefined undefined",
+      "vehicleId": "VEH-006",
+      "vehicleInfo": {
+        "id": "VEH-006",
+        "vin": "5J6RW2H85JA123456",
+        "year": 2023,
+        "make": "Honda",
+        "model": "CR-V",
+        "licensePlate": "CRV2024"
+      },
+      "currentMileage": 34000,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-001",
+          "serviceName": "Conventional Oil Change",
+          "category": "Oil_Change",
+          "quantity": "5",
+          "unitPrice": 39.99,
+          "lineTotal": 199.95,
+          "partsCost": 20,
+          "laborCost": 19.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-006",
+          "serviceName": "European Vehicle Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 99.99,
+          "lineTotal": 99.99,
+          "partsCost": 65,
+          "laborCost": 34.99,
+          "laborMinutes": 30
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-014",
+          "serviceName": "Cabin Air Filter Replacement",
+          "category": "Filters",
+          "quantity": 1,
+          "unitPrice": 44.99,
+          "lineTotal": 44.99,
+          "partsCost": 30,
+          "laborCost": 14.99,
+          "laborMinutes": 10
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-026",
+          "serviceName": "Brake Light Bulb Replacement",
+          "category": "Lights",
+          "quantity": 1,
+          "unitPrice": 19.99,
+          "lineTotal": 19.99,
+          "partsCost": 8,
+          "laborCost": 11.99,
+          "laborMinutes": 10
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-036",
+          "serviceName": "Diagnostic Scan",
+          "category": "Inspection",
+          "quantity": 1,
+          "unitPrice": 49.99,
+          "lineTotal": 49.99,
+          "partsCost": 0,
+          "laborCost": 49.99,
+          "laborMinutes": 20
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T83067562",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 414.91,
+      "tax": 33.19,
+      "taxRate": 0.08,
+      "total": 448.1,
+      "partsTotal": 203,
+      "laborTotal": 211.91,
+      "totalLaborMinutes": 170,
+      "createdDate": "2026-02-27T09:04:27.562Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-02-27T09:04:27.562Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772183067562"
+    },
+    {
+      "customerId": "CUST-005",
+      "customerName": "undefined undefined",
+      "vehicleId": "VEH-006",
+      "vehicleInfo": {
+        "id": "VEH-006",
+        "vin": "5J6RW2H85JA123456",
+        "year": 2023,
+        "make": "Honda",
+        "model": "CR-V",
+        "licensePlate": "CRV2024"
+      },
+      "currentMileage": 34000,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-001",
+          "serviceName": "Conventional Oil Change",
+          "category": "Oil_Change",
+          "quantity": "5",
+          "unitPrice": 39.99,
+          "lineTotal": 199.95,
+          "partsCost": 20,
+          "laborCost": 19.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-006",
+          "serviceName": "European Vehicle Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 99.99,
+          "lineTotal": 99.99,
+          "partsCost": 65,
+          "laborCost": 34.99,
+          "laborMinutes": 30
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-014",
+          "serviceName": "Cabin Air Filter Replacement",
+          "category": "Filters",
+          "quantity": 1,
+          "unitPrice": 44.99,
+          "lineTotal": 44.99,
+          "partsCost": 30,
+          "laborCost": 14.99,
+          "laborMinutes": 10
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-026",
+          "serviceName": "Brake Light Bulb Replacement",
+          "category": "Lights",
+          "quantity": 1,
+          "unitPrice": 19.99,
+          "lineTotal": 19.99,
+          "partsCost": 8,
+          "laborCost": 11.99,
+          "laborMinutes": 10
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-036",
+          "serviceName": "Diagnostic Scan",
+          "category": "Inspection",
+          "quantity": 1,
+          "unitPrice": 49.99,
+          "lineTotal": 49.99,
+          "partsCost": 0,
+          "laborCost": 49.99,
+          "laborMinutes": 20
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T83062213",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 414.91,
+      "tax": 33.19,
+      "taxRate": 0.08,
+      "total": 448.1,
+      "partsTotal": 203,
+      "laborTotal": 211.91,
+      "totalLaborMinutes": 170,
+      "createdDate": "2026-02-27T09:04:22.213Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-02-27T09:04:22.214Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772183062213"
+    },
+    {
+      "customerId": "CUST-001",
+      "customerName": "undefined undefined",
+      "vehicleId": "VEH-001",
+      "vehicleInfo": {
+        "id": "VEH-001",
+        "vin": "1HGBH41JXMN109186",
+        "year": 2023,
+        "make": "Toyota",
+        "model": "Camry",
+        "licensePlate": "ABC1234"
+      },
+      "currentMileage": 23000,
+      "notes": "",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-001",
+          "serviceName": "Conventional Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 39.99,
+          "lineTotal": 39.99,
+          "partsCost": 20,
+          "laborCost": 19.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-003",
+          "serviceName": "Full Synthetic Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "lineTotal": 79.99,
+          "partsCost": 50,
+          "laborCost": 29.99,
+          "laborMinutes": 20
+        },
+        {
+          "id": "",
+          "serviceId": "SVC-005",
+          "serviceName": "Diesel Oil Change",
+          "category": "Oil_Change",
+          "quantity": 1,
+          "unitPrice": 89.99,
+          "lineTotal": 89.99,
+          "partsCost": 55,
+          "laborCost": 34.99,
+          "laborMinutes": 30
+        }
+      ],
+      "createdBy": "current-user",
+      "ticketNumber": "T82479212",
+      "status": "Created",
+      "discounts": [],
+      "subtotal": 209.97,
+      "tax": 16.8,
+      "taxRate": 0.08,
+      "total": 226.77,
+      "partsTotal": 125,
+      "laborTotal": 84.97,
+      "totalLaborMinutes": 70,
+      "createdDate": "2026-02-27T08:54:39.212Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-02-27T08:54:39.212Z",
+          "changedBy": "current-user"
+        }
+      ],
+      "discountTotal": 0,
+      "ticketId": "TKT-1772182479212"
+    },
+    {
+      "customerId": "CUST-001",
+      "customerName": "John Doe",
+      "vehicleId": "VEH-001",
+      "vehicleInfo": {
+        "id": "VEH-001",
+        "vin": "1HGBH41JXMN109186",
+        "year": 2021,
+        "make": "Honda",
+        "model": "Accord",
+        "licensePlate": "ABC123"
+      },
+      "currentMileage": 50000,
+      "notes": "Test ticket",
+      "lineItems": [
+        {
+          "id": "",
+          "serviceId": "SVC-001",
+          "serviceName": "Oil Change",
+          "category": "Maintenance",
+          "quantity": 1,
+          "unitPrice": 49.99,
+          "lineTotal": 49.99,
+          "partsCost": 25,
+          "laborCost": 24.99,
+          "laborMinutes": 30
+        }
+      ],
+      "createdBy": "EMP001",
+      "id": "TKT-1772345937456",
+      "ticketId": "TKT-1772345937456",
+      "ticketNumber": "T45937457",
+      "status": "Created",
+      "createdDate": "2026-03-01T06:18:57.457Z",
+      "statusHistory": [
+        {
+          "status": "Created",
+          "timestamp": "2026-03-01T06:18:57.457Z",
+          "changedBy": "EMP001"
+        }
+      ]
+    }
+  ]
+}

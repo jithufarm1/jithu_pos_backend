@@ -1,0 +1,217 @@
+<div class="customer-detail-container">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading customer details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="error-state">
+    <div class="error-icon">⚠️</div>
+    <h2>{{ error }}</h2>
+    <button class="btn-primary" (click)="goBack()">Back to Search</button>
+  </div>
+
+  <!-- Customer Details -->
+  <div *ngIf="customer && !isLoading" class="customer-content">
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="header-left">
+        <button class="btn-back" (click)="goBack()">← Back</button>
+        <h1>{{ customer.firstName }} {{ customer.lastName }}</h1>
+        <span *ngIf="customer.loyaltyProgram" class="loyalty-badge" [class]="'tier-' + customer.loyaltyProgram.tier.toLowerCase()">
+          {{ customer.loyaltyProgram.tier }}
+        </span>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary" (click)="editCustomer()">✏️ Edit</button>
+        <button class="btn-danger" (click)="deleteCustomer()">🗑️ Delete</button>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Left Column -->
+      <div class="left-column">
+        <!-- Contact Information -->
+        <div class="info-card">
+          <h2 class="card-title">Contact Information</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Phone:</span>
+              <span class="info-value">{{ formatPhone(customer.phone) }}</span>
+            </div>
+            <div class="info-item" *ngIf="customer.alternatePhone">
+              <span class="info-label">Alt Phone:</span>
+              <span class="info-value">{{ formatPhone(customer.alternatePhone) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Email:</span>
+              <span class="info-value">{{ customer.email }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Address:</span>
+              <span class="info-value">
+                {{ customer.address.street }}<br>
+                {{ customer.address.city }}, {{ customer.address.state }} {{ customer.address.zipCode }}
+              </span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-action" (click)="sendEmail()">📧 Email</button>
+            <button class="btn-action" (click)="sendSMS()">💬 SMS</button>
+          </div>
+        </div>
+
+        <!-- Vehicles -->
+        <div class="info-card">
+          <h2 class="card-title">Vehicles ({{ customer.vehicles.length }})</h2>
+          <div *ngIf="customer.vehicles.length === 0" class="empty-message">
+            No vehicles registered
+          </div>
+          <div *ngFor="let vehicle of customer.vehicles" class="vehicle-item">
+            <div class="vehicle-header">
+              <span class="vehicle-name">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</span>
+              <span *ngIf="vehicle.isPrimary" class="primary-badge">PRIMARY</span>
+            </div>
+            <div class="vehicle-details">
+              <div class="vehicle-detail">
+                <span class="detail-label">VIN:</span>
+                <span class="detail-value">{{ vehicle.vin }}</span>
+              </div>
+              <div class="vehicle-detail" *ngIf="vehicle.licensePlate">
+                <span class="detail-label">License:</span>
+                <span class="detail-value">{{ vehicle.licensePlate }}</span>
+              </div>
+              <div class="vehicle-detail">
+                <span class="detail-label">Mileage:</span>
+                <span class="detail-value">{{ vehicle.mileage | number }} mi</span>
+              </div>
+              <div class="vehicle-detail" *ngIf="vehicle.color">
+                <span class="detail-label">Color:</span>
+                <span class="detail-value">{{ vehicle.color }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Communication Preferences -->
+        <div class="info-card">
+          <h2 class="card-title">Communication Preferences</h2>
+          <div class="preferences-grid">
+            <div class="pref-item">
+              <span class="pref-icon">{{ customer.preferences.emailNotifications ? '✅' : '❌' }}</span>
+              <span class="pref-label">Email Notifications</span>
+            </div>
+            <div class="pref-item">
+              <span class="pref-icon">{{ customer.preferences.smsNotifications ? '✅' : '❌' }}</span>
+              <span class="pref-label">SMS Notifications</span>
+            </div>
+            <div class="pref-item">
+              <span class="pref-icon">{{ customer.preferences.marketingEmails ? '✅' : '❌' }}</span>
+              <span class="pref-label">Marketing Emails</span>
+            </div>
+            <div class="pref-item">
+              <span class="pref-icon">📞</span>
+              <span class="pref-label">Preferred: {{ customer.preferences.preferredContactMethod | titlecase }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-column">
+        <!-- Analytics Dashboard -->
+        <div class="info-card analytics-card">
+          <h2 class="card-title">Customer Analytics</h2>
+          <div class="analytics-grid">
+            <div class="metric-box">
+              <div class="metric-value">{{ analytics?.totalVisits || 0 }}</div>
+              <div class="metric-label">Total Visits</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-value">${{ analytics?.totalSpent || 0 | number:'1.2-2' }}</div>
+              <div class="metric-label">Total Spent</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-value">${{ analytics?.averageTicketValue || 0 | number:'1.2-2' }}</div>
+              <div class="metric-label">Avg Ticket</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-value">{{ analytics?.vehicleCount || 0 }}</div>
+              <div class="metric-label">Vehicles</div>
+            </div>
+          </div>
+          <div class="last-visit" *ngIf="customer.lastVisitDate">
+            <span class="visit-label">Last Visit:</span>
+            <span class="visit-date">{{ customer.lastVisitDate | date:'medium' }}</span>
+          </div>
+        </div>
+
+        <!-- Loyalty Program -->
+        <div class="info-card" *ngIf="customer.loyaltyProgram">
+          <h2 class="card-title">Loyalty Program</h2>
+          <div class="loyalty-content">
+            <div class="loyalty-tier">
+              <span class="tier-badge-large" [class]="'tier-' + customer.loyaltyProgram.tier.toLowerCase()">
+                {{ customer.loyaltyProgram.tier }}
+              </span>
+            </div>
+            <div class="loyalty-points">
+              <div class="points-value">{{ customer.loyaltyProgram.points | number }}</div>
+              <div class="points-label">Points Available</div>
+            </div>
+            <div class="loyalty-info">
+              <div class="loyalty-detail">
+                <span class="detail-label">Member ID:</span>
+                <span class="detail-value">{{ customer.loyaltyProgram.memberId }}</span>
+              </div>
+              <div class="loyalty-detail">
+                <span class="detail-label">Member Since:</span>
+                <span class="detail-value">{{ customer.loyaltyProgram.joinDate | date:'mediumDate' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service History Summary -->
+        <div class="info-card">
+          <h2 class="card-title">Recent Service History</h2>
+          <div class="empty-message">
+            No service history available
+          </div>
+          <button class="btn-secondary full-width">View Full History</button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="info-card">
+          <h2 class="card-title">Quick Actions</h2>
+          <div class="actions-grid">
+            <button class="action-btn" (click)="printCustomer()">
+              <span class="action-icon">🖨️</span>
+              <span class="action-label">Print</span>
+            </button>
+            <button class="action-btn" (click)="exportCustomer()">
+              <span class="action-icon">📥</span>
+              <span class="action-label">Export</span>
+            </button>
+            <button class="action-btn" (click)="sendEmail()">
+              <span class="action-icon">📧</span>
+              <span class="action-label">Email</span>
+            </button>
+            <button class="action-btn" (click)="sendSMS()">
+              <span class="action-icon">💬</span>
+              <span class="action-label">SMS</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="info-card" *ngIf="customer.notes">
+          <h2 class="card-title">Notes</h2>
+          <p class="notes-content">{{ customer.notes }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

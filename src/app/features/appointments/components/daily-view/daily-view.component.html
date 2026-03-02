@@ -1,0 +1,103 @@
+<div class="daily-view-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading appointments...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="loadAppointments()">Retry</button>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div *ngIf="!loading && !error" class="calendar-grid">
+    <!-- Header Row -->
+    <div class="grid-header">
+      <div class="time-header">Time</div>
+      <div class="bay-header" *ngFor="let bay of bays">
+        Bay {{ bay }}
+      </div>
+    </div>
+
+    <!-- Timeline Grid -->
+    <div class="timeline-grid">
+      <!-- Time Labels Column -->
+      <div class="time-labels">
+        <div 
+          *ngFor="let slot of timeSlots" 
+          class="time-label"
+        >
+          {{ slot.time }}
+        </div>
+      </div>
+
+      <!-- Bay Columns -->
+      <div 
+        *ngFor="let bay of bays" 
+        class="bay-column"
+        [attr.data-bay]="bay"
+      >
+        <!-- Grid lines for time slots -->
+        <div 
+          *ngFor="let slot of timeSlots" 
+          class="time-slot-line"
+        ></div>
+      </div>
+
+      <!-- Appointment Cards (Positioned Absolutely) -->
+      <div class="appointments-layer">
+        <div
+          *ngFor="let card of appointmentCards"
+          class="appointment-card"
+          [ngClass]="getStatusColor(card.appointment.status)"
+          [ngStyle]="getCardStyle(card)"
+          (click)="viewAppointmentDetail(card.appointment)"
+        >
+          <!-- Appointment Header -->
+          <div class="card-header">
+            <span class="card-time">{{ formatTime(card.appointment.scheduledDateTime) }}</span>
+            <span class="card-status">{{ getStatusText(card.appointment.status) }}</span>
+          </div>
+
+          <!-- Customer Info -->
+          <div class="card-customer">
+            <strong>{{ card.customerName }}</strong>
+          </div>
+
+          <!-- Vehicle Info -->
+          <div class="card-vehicle">
+            {{ card.vehicleInfo }}
+          </div>
+
+          <!-- Service Types -->
+          <div class="card-services">
+            <span class="service-count">{{ card.appointment.serviceTypes.length }} service(s)</span>
+          </div>
+
+          <!-- Duration -->
+          <div class="card-duration">
+            {{ card.appointment.duration }} min
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card-actions" *ngIf="canCheckIn(card.appointment)">
+            <button 
+              class="check-in-button"
+              (click)="quickCheckIn(card.appointment, $event)"
+              title="Quick Check-In"
+            >
+              Check In
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && appointments.length === 0" class="empty-state">
+    <p>No appointments scheduled for this date.</p>
+  </div>
+</div>

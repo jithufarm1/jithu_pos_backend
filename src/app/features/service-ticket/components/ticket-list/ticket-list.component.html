@@ -1,0 +1,223 @@
+<div class="ticket-list-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Service Tickets</h1>
+    <button class="btn btn-primary btn-create" (click)="createNewTicket()">
+      <span class="icon">+</span>
+      Create New Ticket
+    </button>
+  </div>
+
+  <!-- Search and Filters -->
+  <div class="filters-section">
+    <div class="search-box">
+      <input
+        type="text"
+        class="form-control search-input"
+        placeholder="Search by ticket #, customer name, or vehicle..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange($event)"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="filters-row">
+      <div class="filter-group">
+        <label for="statusFilter">Status</label>
+        <select
+          id="statusFilter"
+          class="form-control"
+          [(ngModel)]="selectedStatus"
+          (ngModelChange)="onStatusFilterChange()"
+        >
+          <option value="">All Statuses</option>
+          <option value="Created">Created</option>
+          <option value="In_Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Paid">Paid</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="technicianFilter">Technician</label>
+        <select
+          id="technicianFilter"
+          class="form-control"
+          [(ngModel)]="selectedTechnician"
+          (ngModelChange)="onTechnicianFilterChange()"
+        >
+          <option value="">All Technicians</option>
+          <option *ngFor="let tech of technicians" [value]="tech.id">
+            {{ tech.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="startDate">Start Date</label>
+        <input
+          type="date"
+          id="startDate"
+          class="form-control"
+          [(ngModel)]="startDate"
+          (ngModelChange)="onDateRangeChange()"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="endDate">End Date</label>
+        <input
+          type="date"
+          id="endDate"
+          class="form-control"
+          [(ngModel)]="endDate"
+          (ngModelChange)="onDateRangeChange()"
+        />
+      </div>
+
+      <div class="filter-group filter-actions">
+        <button class="btn btn-secondary btn-clear" (click)="clearFilters()">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Summary -->
+  <div class="results-summary">
+    <p>
+      Showing {{ paginatedTickets.length }} of {{ filteredTickets.length }} tickets
+      <span *ngIf="filteredTickets.length !== tickets.length">
+        (filtered from {{ tickets.length }} total)
+      </span>
+    </p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading tickets...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="error-state">
+    <p class="error-message">{{ error }}</p>
+    <button class="btn btn-primary" (click)="loadTickets()">Retry</button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && !error && paginatedTickets.length === 0" class="empty-state">
+    <div class="empty-icon">📋</div>
+    <h3>No tickets found</h3>
+    <p *ngIf="searchQuery || selectedStatus || selectedTechnician || startDate || endDate">
+      Try adjusting your filters or search criteria.
+    </p>
+    <p *ngIf="!searchQuery && !selectedStatus && !selectedTechnician && !startDate && !endDate">
+      Get started by creating your first service ticket.
+    </p>
+    <button class="btn btn-primary" (click)="createNewTicket()">
+      Create New Ticket
+    </button>
+  </div>
+
+  <!-- Ticket List -->
+  <div *ngIf="!isLoading && !error && paginatedTickets.length > 0" class="ticket-list">
+    <div
+      *ngFor="let ticket of paginatedTickets"
+      class="ticket-card"
+      (click)="viewTicket(ticket.id)"
+    >
+      <div class="ticket-header">
+        <div class="ticket-number">
+          <strong>{{ ticket.ticketNumber }}</strong>
+        </div>
+        <div class="ticket-status">
+          <span class="status-badge" [ngClass]="getStatusClass(ticket.status)">
+            {{ getStatusLabel(ticket.status) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="ticket-body">
+        <div class="ticket-info">
+          <div class="info-row">
+            <span class="label">Customer:</span>
+            <span class="value">{{ ticket.customerName }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Vehicle:</span>
+            <span class="value">{{ ticket.vehicleInfo }}</span>
+          </div>
+          <div class="info-row" *ngIf="ticket.assignedTechnician">
+            <span class="label">Technician:</span>
+            <span class="value">{{ ticket.assignedTechnician }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Services:</span>
+            <span class="value">{{ ticket.serviceCount }} service(s)</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Created:</span>
+            <span class="value">{{ formatDate(ticket.createdDate) }}</span>
+          </div>
+        </div>
+
+        <div class="ticket-total">
+          <div class="total-label">Total</div>
+          <div class="total-amount">{{ formatCurrency(ticket.total) }}</div>
+        </div>
+      </div>
+
+      <div class="ticket-actions">
+        <button
+          class="btn btn-secondary btn-sm"
+          (click)="viewTicket(ticket.id)"
+          title="View Details"
+        >
+          View Details
+        </button>
+        <button
+          class="btn btn-secondary btn-sm"
+          (click)="printWorkOrder(ticket.id, $event)"
+          title="Print Work Order"
+        >
+          🖨️ Print
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="!isLoading && !error && filteredTickets.length > pageSize" class="pagination">
+    <button
+      class="btn btn-pagination"
+      [disabled]="currentPage === 1"
+      (click)="previousPage()"
+    >
+      ← Previous
+    </button>
+
+    <div class="page-numbers">
+      <button
+        *ngFor="let page of getPageNumbers()"
+        class="btn btn-page-number"
+        [class.active]="page === currentPage"
+        (click)="goToPage(page)"
+      >
+        {{ page }}
+      </button>
+    </div>
+
+    <button
+      class="btn btn-pagination"
+      [disabled]="currentPage === totalPages"
+      (click)="nextPage()"
+    >
+      Next →
+    </button>
+
+    <div class="pagination-info">
+      Page {{ currentPage }} of {{ totalPages }}
+    </div>
+  </div>
+</div>

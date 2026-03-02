@@ -1,0 +1,112 @@
+<div class="cache-demo-container">
+  <h2>Vehicle Data Cache Demo</h2>
+  
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="success" class="alert alert-success">
+    {{ success }}
+  </div>
+  
+  <div *ngIf="loading" class="loading-section">
+    <div class="spinner"></div>
+    <p>{{ currentOperation }}</p>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="downloadProgress"></div>
+    </div>
+    <p>{{ downloadProgress }}%</p>
+  </div>
+  
+  <div class="test-controls">
+    <h3>Test Operations</h3>
+    
+    <div class="control-group">
+      <label>Year:</label>
+      <input type="number" [(ngModel)]="selectedYear" [disabled]="loading">
+    </div>
+    
+    <div class="control-group">
+      <label>Make:</label>
+      <select [(ngModel)]="selectedMake" [disabled]="loading">
+        <option *ngFor="let make of makes" [value]="make">{{ make }}</option>
+      </select>
+    </div>
+    
+    <div class="button-group">
+      <button (click)="loadChunk()" [disabled]="loading">
+        Load Chunk
+      </button>
+      <button (click)="loadCatalog()" [disabled]="loading">
+        Load Catalog
+      </button>
+      <button (click)="prefetchPopular()" [disabled]="loading">
+        Prefetch Popular
+      </button>
+      <button (click)="clearCache()" [disabled]="loading" class="danger">
+        Clear Cache
+      </button>
+    </div>
+  </div>
+  
+  <div class="metrics-section" *ngIf="metrics">
+    <h3>Cache Metrics</h3>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total Size</div>
+        <div class="metric-value">{{ formatBytes(metrics.totalSize) }}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Chunks Cached</div>
+        <div class="metric-value">{{ metrics.chunkCount }}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Hit Rate</div>
+        <div class="metric-value">{{ ((metrics.hitCount / (metrics.hitCount + metrics.missCount)) * 100).toFixed(1) }}%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Compression</div>
+        <div class="metric-value">{{ ((metrics.compressedSize / metrics.totalSize) * 100).toFixed(0) }}%</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chunks-section" *ngIf="cachedChunks.length > 0">
+    <h3>Cached Chunks</h3>
+    <table class="chunks-table">
+      <thead>
+        <tr>
+          <th>Chunk ID</th>
+          <th>Year</th>
+          <th>Make</th>
+          <th>Size</th>
+          <th>Last Accessed</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chunk of cachedChunks">
+          <td>{{ chunk.chunkId }}</td>
+          <td>{{ chunk.year }}</td>
+          <td>{{ chunk.make }}</td>
+          <td>{{ formatBytes(chunk.size) }}</td>
+          <td>{{ chunk.lastAccessed | date:'short' }}</td>
+          <td>{{ chunk.priority }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="instructions">
+    <h3>How to Test</h3>
+    <ol>
+      <li>Click "Load Catalog" to fetch available chunks</li>
+      <li>Select a year and make, then click "Load Chunk"</li>
+      <li>Watch the progress bar as data downloads and compresses</li>
+      <li>Check cache metrics to see storage usage</li>
+      <li>Try loading the same chunk again (should be instant from cache)</li>
+      <li>Click "Prefetch Popular" to download multiple chunks</li>
+      <li>Open DevTools → Application → IndexedDB to see stored data</li>
+    </ol>
+  </div>
+</div>
