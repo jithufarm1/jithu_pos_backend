@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear Cache - Valvoline POS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c4a7c;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #c8102e;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px 10px 10px 0;
+    }
+    button:hover {
+      background: #a00d25;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 4px;
+      display: none;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    .instructions {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+      border: 1px solid #ffeaa7;
+    }
+    .instructions h3 {
+      margin-top: 0;
+      color: #856404;
+    }
+    .instructions ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .instructions li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧹 Clear Valvoline POS Cache</h1>
+    
+    <div class="instructions">
+      <h3>Quick Fix Instructions:</h3>
+      <ol>
+        <li>Click "Clear All Cache" button below</li>
+        <li>Wait for success message</li>
+        <li>Click "Open Fresh App" button</li>
+        <li>You should see the Valvoline logo!</li>
+      </ol>
+    </div>
+
+    <button onclick="clearAllCache()">Clear All Cache</button>
+    <button onclick="openFreshApp()">Open Fresh App</button>
+    
+    <div id="status" class="status"></div>
+
+    <div class="instructions" style="margin-top: 30px;">
+      <h3>If logo still doesn't appear:</h3>
+      <ol>
+        <li>Open Chrome DevTools (F12 or Cmd+Option+I)</li>
+        <li>Go to "Application" tab</li>
+        <li>Click "Service Workers" in left sidebar</li>
+        <li>Click "Unregister" next to the service worker</li>
+        <li>Click "Storage" in left sidebar</li>
+        <li>Click "Clear site data" button</li>
+        <li>Close DevTools and hard refresh (Cmd+Shift+R)</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    async function clearAllCache() {
+      const statusDiv = document.getElementById('status');
+      statusDiv.style.display = 'block';
+      statusDiv.className = 'status info';
+      statusDiv.innerHTML = '🔄 Clearing cache...';
+
+      try {
+        // Unregister all service workers
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (let registration of registrations) {
+          await registration.unregister();
+          console.log('Service worker unregistered:', registration);
+        }
+
+        // Clear all caches
+        const cacheNames = await caches.keys();
+        for (let cacheName of cacheNames) {
+          await caches.delete(cacheName);
+          console.log('Cache deleted:', cacheName);
+        }
+
+        // Clear localStorage
+        localStorage.clear();
+        console.log('localStorage cleared');
+
+        // Clear sessionStorage
+        sessionStorage.clear();
+        console.log('sessionStorage cleared');
+
+        // Clear IndexedDB
+        const databases = await indexedDB.databases();
+        for (let db of databases) {
+          indexedDB.deleteDatabase(db.name);
+          console.log('IndexedDB deleted:', db.name);
+        }
+
+        statusDiv.className = 'status success';
+        statusDiv.innerHTML = `
+          ✅ Cache cleared successfully!<br>
+          <br>
+          <strong>Cleared:</strong><br>
+          • ${registrations.length} service worker(s)<br>
+          • ${cacheNames.length} cache(s)<br>
+          • localStorage<br>
+          • sessionStorage<br>
+          • ${databases.length} IndexedDB database(s)<br>
+          <br>
+          Now click "Open Fresh App" to see the logo!
+        `;
+      } catch (error) {
+        statusDiv.className = 'status info';
+        statusDiv.innerHTML = `
+          ⚠️ Partial clear completed. Error: ${error.message}<br>
+          <br>
+          Please follow the manual instructions below.
+        `;
+        console.error('Error clearing cache:', error);
+      }
+    }
+
+    function openFreshApp() {
+      // Open in new tab with cache-busting parameter
+      const timestamp = new Date().getTime();
+      window.open(`http://localhost:8080/?nocache=${timestamp}`, '_blank');
+    }
+  </script>
+</body>
+</html>

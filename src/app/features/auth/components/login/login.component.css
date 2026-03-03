@@ -54,6 +54,14 @@
   border: 3px solid #ffffff;
 }
 
+.valvoline-logo-img {
+  height: 50px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+}
+
 .valvoline-logo {
   display: flex;
   align-items: center;

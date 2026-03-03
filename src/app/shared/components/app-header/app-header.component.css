@@ -62,41 +62,12 @@
   font-size: 14px;
 }
 
-.valvoline-mini-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  width: 40px;
-  height: 24px;
-  position: relative;
-  border-radius: 2px;
-}
-
-.logo-v-red {
-  font-size: 20px;
-  font-weight: bold;
-  color: #c8102e;
-  font-family: 'Arial Black', Arial, sans-serif;
-  position: absolute;
-  left: 4px;
-  transform: skewX(-10deg);
-}
-
-.logo-v-blue {
-  font-size: 20px;
-  font-weight: bold;
-  color: #1e5aa8;
-  font-family: 'Arial Black', Arial, sans-serif;
-  position: absolute;
-  right: 4px;
-  transform: skewX(-10deg);
-}
-
-.app-name {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+.valvoline-logo {
+  height: 40px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Center Section */
@@ -287,8 +258,9 @@
     padding: 10px 16px;
   }
 
-  .app-name {
-    display: none;
+  .valvoline-logo {
+    height: 32px;
+    max-width: 220px;
   }
 
   .user-details {
@@ -326,16 +298,6 @@
     font-size: 16px;
     padding: 0 12px;
   }
-
-  .valvoline-mini-logo {
-    width: 36px;
-    height: 22px;
-  }
-
-  .logo-v-red,
-  .logo-v-blue {
-    font-size: 18px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -352,14 +314,9 @@
     padding: 6px 10px;
   }
 
-  .valvoline-mini-logo {
-    width: 32px;
-    height: 20px;
-  }
-
-  .logo-v-red,
-  .logo-v-blue {
-    font-size: 16px;
+  .valvoline-logo {
+    height: 28px;
+    max-width: 180px;
   }
 
   .header-center {
